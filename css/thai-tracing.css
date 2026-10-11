@@ -438,27 +438,27 @@ html, body {
   z-index: 2;
 }
 
-/* Soft Gray Fill Base ("ทำเป็นเทาๆ") */
+/* Soft White/Light Fill Base (พื้นในลำตัวพยัญชนะ) */
 .tpl-glyph-base {
   font-family: 'Sarabun', 'Noto Sans Thai', 'Krub', 'Thonburi', sans-serif !important;
   font-size: 380px;
   font-weight: 700;
-  fill: #e2e8f0;
-  stroke: #cbd5e1;
-  stroke-width: 3px;
+  fill: #ffffff;
+  stroke: #ffffff;
+  stroke-width: 2px;
   stroke-linejoin: round;
   stroke-linecap: round;
   user-select: none;
   pointer-events: none;
 }
 
-/* Clean Dark-Gray Outline matching user's media_1791396217646.png */
+/* Clean Dark-Slate Outline matching user's reference image */
 .tpl-glyph-outline {
   font-family: 'Sarabun', 'Noto Sans Thai', 'Krub', 'Thonburi', sans-serif !important;
   font-size: 380px;
   font-weight: 700;
   fill: none;
-  stroke: #475569;
+  stroke: #334155;
   stroke-width: 4.5px;
   stroke-linejoin: round;
   stroke-linecap: round;
@@ -466,18 +466,89 @@ html, body {
   pointer-events: none;
 }
 
-/* Subtle Dashed Centerline Guide */
-.tpl-glyph-dashed {
-  font-family: 'Sarabun', 'Noto Sans Thai', 'Krub', 'Thonburi', sans-serif !important;
-  font-size: 380px;
-  font-weight: 700;
+/* Dashed Centerline Guide (เส้นรอยประกลางลำตัวอักษร) */
+.tpl-centerline-dashed {
   fill: none;
   stroke: #94a3b8;
-  stroke-width: 2.5px;
-  stroke-dasharray: 6 8;
+  stroke-width: 4px;
+  stroke-dasharray: 9 9;
+  stroke-linecap: round;
   stroke-linejoin: round;
   user-select: none;
   pointer-events: none;
+}
+
+/* Start Point Marker (จุดเริ่มต้นสีเขียว 🟢 ที่หัวพยัญชนะ) */
+.start-marker-group {
+  pointer-events: none;
+  transition: transform 0.2s ease-out;
+}
+
+.start-glow-pulse {
+  fill: #22c55e;
+  opacity: 0.35;
+  animation: pulseGreenAura 1.6s infinite ease-in-out;
+}
+
+@keyframes pulseGreenAura {
+  0% { r: 10px; opacity: 0.7; }
+  50% { r: 20px; opacity: 0.15; }
+  100% { r: 10px; opacity: 0.7; }
+}
+
+.start-dot-circle {
+  fill: #16a34a;
+  stroke: #ffffff;
+  stroke-width: 3px;
+  filter: drop-shadow(0 2px 4px rgba(22, 163, 74, 0.45));
+}
+
+/* Head attention nudge animation when tapping elsewhere */
+.head-nudge .start-dot-circle {
+  animation: headWiggle 0.5s ease-in-out 2;
+}
+
+@keyframes headWiggle {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.4) translate(-2px, -2px); }
+  75% { transform: scale(1.4) translate(2px, 2px); }
+}
+
+/* End Point Direction Arrow (Red Arrow 🔺) */
+.end-marker-group {
+  pointer-events: none;
+}
+
+.end-arrow-poly {
+  fill: #ef4444;
+  stroke: #ffffff;
+  stroke-width: 1.5px;
+  filter: drop-shadow(0 2px 3px rgba(239, 68, 68, 0.4));
+}
+
+/* Floating Hint Bubble */
+.head-hint-bubble {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  pointer-events: none;
+  animation: floatBounce 0.4s ease-out;
+}
+
+@keyframes floatBounce {
+  0% { opacity: 0; transform: translate(-50%, -10px) scale(0.9); }
+  100% { opacity: 1; transform: translate(-50%, 0) scale(1); }
 }
 
 /* User Drawing Canvas */

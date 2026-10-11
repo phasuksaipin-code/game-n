@@ -17,7 +17,7 @@ const THAI_CONSONANTS_DATA = [
     img: "assets/images/thai_letters/ko_kai.jpg",
     instruction: "เริ่มจากล่างซ้าย ลากขึ้นไปทำปากไก่ โค้งมนหลังคา แล้วลากลงมาทางขวา",
     path: "M 125 330 L 125 180 C 125 155 140 140 160 140 L 135 115 C 155 90 195 75 245 75 C 290 75 305 100 305 145 L 305 330",
-    startPoint: { x: 125, y: 280 },
+    startPoint: { x: 125, y: 330 },
     startAngle: -90
   },
   {

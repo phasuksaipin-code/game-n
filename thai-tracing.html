@@ -140,17 +140,33 @@
             <line x1="0" y1="350" x2="400" y2="350" />
           </svg>
 
-          <!-- Authentic Thai Consonant Template SVG (แม่แบบพยัญชนะสีเทาตัวใหญ่เต็มกรอบ) -->
+          <!-- Authentic Thai Consonant Template SVG (แม่แบบพยัญชนะไทย: โครงร่างสีเข้ม ไส้สีขาว เส้นรอยประกลางลำตัว จุดเริ่มสีเขียว และลูกศรสีแดง) -->
           <svg class="guide-svg-layer" id="guideSvg" viewBox="0 0 400 400">
-            <!-- 1. Soft Gray Fill Base ("ทำเป็นเทาๆ") -->
+            <!-- 1. Soft White Fill Base (พื้นลำตัวพยัญชนะ) -->
             <text id="tplTextBase" class="tpl-glyph-base" x="200" y="348" text-anchor="middle">ก</text>
             
-            <!-- 2. Clean Dark-Gray Outline (แบบคัดโครงร่างแม่แบบ ตามรูปที่แนบมา) -->
+            <!-- 2. Clean Dark-Slate Outline (ขอบโครงร่างแม่แบบสีเข้มคมชัด) -->
             <text id="tplTextOutline" class="tpl-glyph-outline" x="200" y="348" text-anchor="middle">ก</text>
             
-            <!-- 3. Dashed Centerline Guide (เส้นประสำหรับลากตามรอย) -->
-            <text id="tplTextDashed" class="tpl-glyph-dashed" x="200" y="348" text-anchor="middle">ก</text>
+            <!-- 3. Dashed Centerline Guide (เส้นรอยประกลางลำตัวพยัญชนะ) -->
+            <path id="tplCenterlineDashed" class="tpl-centerline-dashed" d="" fill="none" />
+
+            <!-- 4. Start Point Indicator (จุดเริ่มต้นสีเขียว 🟢 ที่หัวพยัญชนะ) -->
+            <g id="startMarkerGroup" class="start-marker-group" transform="translate(0, 0)">
+              <circle class="start-glow-pulse" cx="0" cy="0" r="14" />
+              <circle class="start-dot-circle" cx="0" cy="0" r="9" />
+            </g>
+
+            <!-- 5. End Point Direction Arrow (หัวลูกศรสีแดง 🔺 แสดงทิศทางปลายเส้น) -->
+            <g id="endMarkerGroup" class="end-marker-group" transform="translate(0, 0)">
+              <polygon class="end-arrow-poly" points="0,-9 7,6 -7,6" />
+            </g>
           </svg>
+
+          <!-- Floating Start-At-Head Hint Tooltip -->
+          <div class="head-hint-bubble" id="headHintBubble" style="display: none;">
+            <span>🟢 เริ่มเขียนจากหัวสีเขียวก่อนนะจ๊ะ!</span>
+          </div>
 
           <!-- Touch / Mouse Drawing Canvas -->
           <canvas class="tracing-canvas" id="tracingCanvas"></canvas>
