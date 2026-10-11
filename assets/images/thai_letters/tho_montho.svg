@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <!-- 3D Studio Background -->
+    <radialGradient id="bgGlow" cx="45%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="55%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </radialGradient>
+    
+    <!-- 3D Ground Contact Shadow Filter -->
+    <filter id="groundShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+    
+    <!-- 3D Volumetric Depth Drop Shadow Filter -->
+    <filter id="clayShadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#0f172a" flood-opacity="0.22"/>
+    </filter>
+    
+    <!-- Specular Flare Filter -->
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <radialGradient id="queenSkin" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#fff1f2"/>
+      <stop offset="65%" stop-color="#fecdd3"/>
+      <stop offset="100%" stop-color="#fda4af"/>
+    </radialGradient>
+    <linearGradient id="emeraldDress" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="50%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#064e3b"/>
+    </linearGradient>
+    <linearGradient id="goldTiara" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="50%" stop-color="#eab308"/>
+      <stop offset="100%" stop-color="#854d0e"/>
+    </linearGradient>
+
+  </defs>
+
+  <!-- Studio Backdrop Card -->
+  <rect width="500" height="500" rx="36" fill="url(#bgGlow)"/>
+  
+  <!-- Ground Shadow -->
+  <ellipse cx="250" cy="445" rx="145" ry="24" fill="#64748b" opacity="0.35" filter="url(#groundShadow)"/>
+  <ellipse cx="250" cy="445" rx="85" ry="14" fill="#1e293b" opacity="0.45" filter="url(#groundShadow)"/>
+
+  <!-- 3D Model Layer -->
+  <g filter="url(#clayShadow)">
+
+    <!-- Royal Emerald Robe -->
+    <path d="M 160 310 Q 250 280 340 310 L 375 435 Q 250 455 125 435 Z" fill="url(#emeraldDress)"/>
+    <path d="M 170 310 L 290 435 L 340 435 L 220 310 Z" fill="url(#goldTiara)"/>
+
+    <!-- Head -->
+    <circle cx="250" cy="195" r="95" fill="url(#queenSkin)"/>
+
+    <!-- Sleek Royal Hair -->
+    <path d="M 155 185 Q 250 100 345 185 Q 295 130 250 135 Q 200 130 155 185 Z" fill="#1e293b"/>
+    
+    <!-- Golden Tiara Crown -->
+    <path d="M 185 140 L 250 65 L 315 140 Q 250 120 185 140 Z" fill="url(#goldTiara)"/>
+    <circle cx="250" cy="95" r="10" fill="#ef4444"/>
+    <circle cx="250" cy="65" r="6" fill="#fef08a"/>
+
+    <!-- Cheeks & Eyes -->
+    <circle cx="190" cy="225" r="20" fill="#f43f5e" opacity="0.3"/>
+    <circle cx="310" cy="225" r="20" fill="#f43f5e" opacity="0.3"/>
+    <ellipse cx="210" cy="195" rx="16" ry="20" fill="#0f172a"/>
+    <ellipse cx="290" cy="195" rx="16" ry="20" fill="#0f172a"/>
+    <circle cx="205" cy="188" r="6" fill="#ffffff"/>
+    <circle cx="285" cy="188" r="6" fill="#ffffff"/>
+
+    <path d="M 235 235 Q 250 250 265 235" fill="none" stroke="#be123c" stroke-width="4" stroke-linecap="round"/>
+
+  </g>
+</svg>

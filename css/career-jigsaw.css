@@ -1,0 +1,232 @@
+/* ==========================================================================
+   Career Jigsaw Puzzle Game Styles (เกมต่อภาพจิ๊กซอว์อาชีพ 13 อาชีพ)
+   ========================================================================== */
+
+/* Level Selector Bar customization for 13 career pills */
+.career-selector-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 6px 20px 10px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(2, 132, 199, 0.4) transparent;
+}
+
+.career-selector-bar::-webkit-scrollbar {
+  height: 6px;
+}
+
+.career-selector-bar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.career-selector-bar::-webkit-scrollbar-thumb {
+  background: rgba(2, 132, 199, 0.35);
+  border-radius: 999px;
+}
+
+.career-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid #e0f2fe;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0369a1;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 3px 8px rgba(2, 132, 199, 0.1);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.career-tab-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  background: #ffffff;
+  color: #0284c7;
+  box-shadow: 0 6px 14px rgba(2, 132, 199, 0.2);
+}
+
+.career-tab-btn.active {
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  transform: translateY(-2px) scale(1.05);
+}
+
+.career-tab-btn .tab-count {
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.1);
+  color: inherit;
+}
+
+.career-tab-btn.active .tab-count {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* Board frame aspect ratio matches 1492x1054 */
+.jigsaw-board-panel .board-frame {
+  aspect-ratio: 1492 / 1054;
+  max-width: 100%;
+  max-height: calc(100vh - 210px);
+}
+
+/* Slots and Placed pieces */
+.board-slot {
+  fill: rgba(255, 255, 255, 0.08);
+  stroke: rgba(255, 255, 255, 0.85);
+  stroke-width: 3.5px;
+  stroke-dasharray: 8 6;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.board-slot:hover, .board-slot.drag-over {
+  fill: rgba(245, 158, 11, 0.35);
+  stroke: #f59e0b;
+  stroke-width: 5px;
+  stroke-dasharray: none;
+  filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.6));
+}
+
+.board-slot.shake-error {
+  animation: slotShake 0.4s ease-in-out;
+  stroke: #ef4444;
+  fill: rgba(239, 68, 68, 0.25);
+}
+
+@keyframes slotShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+.placed-piece {
+  animation: piecePop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes piecePop {
+  0% { transform: scale(0.92); opacity: 0.7; }
+  60% { transform: scale(1.04); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.piece-card {
+  touch-action: pan-y;
+}
+
+/* Desktop layout & Tray vertical scroll for levels with many pieces (8-12 pieces) */
+@media (min-width: 901px) {
+  html, body {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .jigsaw-viewport {
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+  }
+
+  .jigsaw-arena {
+    height: calc(100vh - 135px);
+    max-height: calc(100vh - 135px);
+    overflow: hidden;
+    padding: 4px 18px 12px;
+    align-items: stretch;
+  }
+
+  .jigsaw-board-panel {
+    height: 100%;
+    max-height: 100%;
+  }
+
+  .jigsaw-board-panel .board-frame {
+    aspect-ratio: 1492 / 1054;
+    max-width: 100%;
+    max-height: calc(100vh - 175px);
+  }
+
+  .jigsaw-tray-panel {
+    display: flex;
+    flex-direction: column;
+    width: 330px;
+    height: 100%;
+    max-height: 100%;
+    min-height: 0;
+    box-sizing: border-box;
+  }
+
+  .tray-cards-container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    overflow-y: auto !important;
+    overflow-x: hidden;
+    padding: 6px 6px 16px;
+    min-height: 0;
+    align-content: start;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: #38bdf8 #f0f9ff;
+  }
+
+  .tray-cards-container::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .tray-cards-container::-webkit-scrollbar-track {
+    background: #f0f9ff;
+    border-radius: 8px;
+  }
+
+  .tray-cards-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #38bdf8, #0284c7);
+    border-radius: 8px;
+    border: 1px solid #ffffff;
+  }
+
+  .tray-cards-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #0284c7, #0369a1);
+  }
+}
+
+/* Media Queries for tablets & phones */
+@media (max-width: 900px) {
+  .career-selector-bar {
+    padding: 4px 12px 8px;
+    gap: 8px;
+  }
+  .career-tab-btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+  .jigsaw-tray-panel {
+    width: 100%;
+    max-height: 220px;
+    height: auto;
+  }
+  .tray-cards-container {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 8px;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+}

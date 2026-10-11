@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>เกมการเรียนรู้สำหรับเด็กปฐมวัย - อาเซียนศึกษา</title>
+  <link rel="stylesheet" href="css/style.css?v=1.3.7">
+  <link rel="stylesheet" href="css/menu.css?v=1.3.7">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;700;800&family=Mitr:wght@500;700&family=Sarabun:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="menu-viewport">
+    <!-- Blurred Background Landscape Layer -->
+    <div class="game-bg-layer" aria-hidden="true"></div>
+
+    <!-- Top Header -->
+    <header class="menu-header">
+      <!-- Visible Version Pill -->
+      <div style="display: flex; align-items: center; justify-content: flex-start; min-width: 55px;">
+        <span class="version-tag-pill">v1.3.7</span>
+      </div>
+
+      <!-- Title Pill -->
+      <div class="menu-title-container">
+        <h1 class="menu-title">
+          <span>🌟</span>
+          <span>เกมการเรียนรู้อาเซียนสำหรับเด็กปฐมวัย</span>
+          <span>🎈</span>
+        </h1>
+      </div>
+
+      <!-- Music / Sound Button -->
+      <button class="action-btn" id="audioToggleBtn" title="เปิด/ปิด เสียงดนตรี">
+        <svg id="audioIcon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Subtitle instruction -->
+    <div class="menu-hero-text">
+      <span>✨ เลือกเกมแสนสนุกที่ต้องการเล่นได้เลยครับ/ค่ะ ✨</span>
+    </div>
+
+    <!-- Main Grid: 2 Big Engaging Game Portals -->
+    <main class="games-hub-grid">
+
+      <!-- Game 1: ASEAN Landmarks Matching -->
+      <a href="asean-landmarks.html" class="game-portal-card card-landmarks">
+        <div class="portal-badge">
+          <span>🏛️</span>
+          <span>11 ประเทศสมาชิก</span>
+        </div>
+
+        <div class="portal-preview-wrap">
+          <img src="assets/images/landmarks/thailand.png" alt="วัดพระแก้ว" class="portal-img-preview" style="transform: rotate(-6deg);">
+          <img src="assets/images/landmarks/singapore.png" alt="เมอร์ไลออน" class="portal-img-preview">
+          <img src="assets/images/landmarks/cambodia.png" alt="นครวัด" class="portal-img-preview" style="transform: rotate(6deg);">
+        </div>
+
+        <div class="portal-content">
+          <h2 class="portal-title">เกมจับคู่สถานที่สำคัญ</h2>
+          <p class="portal-desc">ลากภาพสถานที่สำคัญของอาเซียน 11 ประเทศ ไปจับคู่กับภาพเงา ฝึกสังเกตและพัฒนาทัศนจำ</p>
+        </div>
+
+        <div class="portal-btn-play">
+          <span>เข้าเล่นเกม</span>
+          <span>➔</span>
+        </div>
+      </a>
+
+      <!-- Game 2: Size Sorting (8 ASEAN Professions) -->
+      <a href="size-sorting.html" class="game-portal-card card-sizes">
+        <div class="portal-badge">
+          <span>📏</span>
+          <span>8 อาชีพอาเซียน</span>
+        </div>
+
+        <div class="portal-preview-wrap">
+          <img src="assets/images/professions/doctor.png" alt="แพทย์" class="portal-img-preview" style="height: 95px; transform: rotate(-5deg);">
+          <img src="assets/images/professions/nurse.png" alt="พยาบาล" class="portal-img-preview" style="height: 120px;">
+          <img src="assets/images/professions/engineer.png" alt="วิศวกร" class="portal-img-preview" style="height: 140px; transform: rotate(5deg);">
+        </div>
+
+        <div class="portal-content">
+          <h2 class="portal-title">เกมเรียงลำดับขนาด เล็ก - ใหญ่</h2>
+          <p class="portal-desc">เรียนรู้อาชีพอาเซียนและลากวางตัวละครเรียงจากขนาดเล็กไปใหญ่ ฝึกทักษะมิติสัมพันธ์</p>
+        </div>
+
+        <div class="portal-btn-play">
+          <span>เข้าเล่นเกม</span>
+          <span>➔</span>
+        </div>
+      </a>
+
+      <!-- Game 3: Jigsaw Puzzle (4 Seasons) -->
+      <a href="jigsaw.html" class="game-portal-card card-jigsaw">
+        <div class="portal-badge">
+          <span>🧩</span>
+          <span>4 ฤดูกาลแสนสนุก</span>
+        </div>
+
+        <div class="portal-preview-wrap">
+          <img src="assets/images/jigsaw/S__66052234.jpg" alt="จิ๊กซอว์ฤดูใบไม้ร่วง" class="portal-img-preview" style="height: 105px; border-radius: 8px; transform: rotate(-5deg);">
+          <img src="assets/images/jigsaw/S__66052232.jpg" alt="จิ๊กซอว์ฤดูร้อน" class="portal-img-preview" style="height: 110px; border-radius: 8px;">
+          <img src="assets/images/jigsaw/S__66052236.jpg" alt="จิ๊กซอว์ฤดูหนาว" class="portal-img-preview" style="height: 105px; border-radius: 8px; transform: rotate(5deg);">
+        </div>
+
+        <div class="portal-content">
+          <h2 class="portal-title">เกมต่อภาพจิ๊กซอว์</h2>
+          <p class="portal-desc">ลากชิ้นส่วนจิ๊กซอว์ภาพ 4 ฤดูกาลมาประกอบให้สมบูรณ์ ฝึกการสังเกต จินตนาการ และกล้ามเนื้อมัดเล็ก</p>
+        </div>
+
+        <div class="portal-btn-play">
+          <span>เข้าเล่นเกม</span>
+          <span>➔</span>
+        </div>
+      </a>
+
+      <!-- Game 4: Number Matching (Arabic - Thai 1-99) -->
+      <a href="number-matching.html" class="game-portal-card card-numbers">
+        <div class="portal-badge">
+          <span>🔢</span>
+          <span>สุ่มเลข 1 - 99</span>
+        </div>
+
+        <div class="portal-preview-wrap number-portal-preview">
+          <div class="portal-num-bubble num-arabic">25</div>
+          <div class="portal-num-connector">➔</div>
+          <div class="portal-num-bubble num-thai">๒๕</div>
+        </div>
+
+        <div class="portal-content">
+          <h2 class="portal-title">เกมโยงเส้นตัวเลข</h2>
+          <p class="portal-desc">ลากเส้นจับคู่ตัวเลขอารบิกกับเลขไทย 1-99 เรียนรู้จำนวนและตัวเลข ฝึกการสังเกตและสายตามิติสัมพันธ์</p>
+        </div>
+
+        <div class="portal-btn-play">
+          <span>เข้าเล่นเกม</span>
+          <span>➔</span>
+        </div>
+      </a>
+
+      <!-- Game 5: Occupation & Workplace Matching (เกมจับคู่อาชีพและสถานที่ 10 หน้า 40 อาชีพ) -->
+      <a href="occupation-matching.html" class="game-portal-card card-occupation">
+        <div class="portal-badge">
+          <span>🏢</span>
+          <span>10 หน้า (40 อาชีพ)</span>
+        </div>
+
+        <div class="portal-preview-wrap">
+          <img src="assets/images/occupations/char_pilot.png" alt="นักบิน" class="portal-img-preview" style="height: 100px; transform: rotate(-5deg);">
+          <img src="assets/images/occupations/place_police.png" alt="สถานีตำรวจ" class="portal-img-preview" style="height: 90px; border-radius: 10px;">
+          <img src="assets/images/occupations/char_chef.png" alt="เชฟพ่อครัว" class="portal-img-preview" style="height: 100px; transform: rotate(5deg);">
+        </div>
+
+        <div class="portal-content">
+          <h2 class="portal-title">เกมจับคู่อาชีพและสถานที่</h2>
+          <p class="portal-desc">ลากตัวละครอาชีพแสนน่ารักไปวางจับคู่กับภาพเงาและสถานที่ทำงาน 10 หน้าเต็ม หน้าละ 4 อาชีพ รวม 40 อาชีพ พร้อมเสียงพูดภาษาไทยและเสียงเอฟเฟกต์สดใส</p>
+        </div>
+
+        <div class="portal-btn-play">
+          <span>เข้าเล่นเกม</span>
+          <span>➔</span>
+        </div>
+      </a>
+
+      <!-- Game 6: Career Jigsaw (เกมต่อภาพจิ๊กซอว์อาชีพ 13 อาชีพ) -->
+      <a href="career-jigsaw.html" class="game-portal-card card-career-jigsaw">
+        <div class="portal-badge">
+          <span>🧩</span>
+          <span>13 อาชีพแสนสนุก</span>
+        </div>
+
+        <div class="portal-preview-wrap">
+          <img src="assets/images/cut_pic/cut_pic01.JPEG" alt="แอร์โฮสเตส" class="portal-img-preview" style="height: 95px; border-radius: 8px; transform: rotate(-5deg);">
+          <img src="assets/images/cut_pic/cut_pic02.JPEG" alt="รปภ." class="portal-img-preview" style="height: 100px; border-radius: 8px;">
+          <img src="assets/images/cut_pic/cut_pic04.JPEG" alt="รถตุ๊กตุ๊ก" class="portal-img-preview" style="height: 95px; border-radius: 8px; transform: rotate(5deg);">
+        </div>
+
+        <div class="portal-content">
+          <h2 class="portal-title">เกมต่อภาพจิ๊กซอว์อาชีพ</h2>
+          <p class="portal-desc">ต่อชิ้นส่วนภาพอาชีพ 13 ด่านตามรอยเส้นประ ฝึกมิติสัมพันธ์ กล้ามเนื้อมัดเล็ก และการสังเกต พร้อมเสียงพากย์ภาษาไทย</p>
+        </div>
+
+        <div class="portal-btn-play">
+          <span>เข้าเล่นเกม</span>
+          <span>➔</span>
+        </div>
+      </a>
+
+      <!-- Game 7: Career Size Sorting (เกมเรียงขนาดอาชีพในฝัน: เล็ก >> ใหญ่ & ใหญ่ >> เล็ก 17 อาชีพ) -->
+      <a href="career-size-sorting.html" class="game-portal-card card-career-size">
+        <div class="portal-badge">
+          <span>📏</span>
+          <span>17 อาชีพ (2 หน้า)</span>
+        </div>
+
+        <div class="portal-preview-wrap">
+          <img src="assets/images/SB_cards/postman/size_1.jpg" alt="เล็ก" class="portal-img-preview" style="height: 75px; border-radius: 8px; transform: rotate(-6deg);">
+          <img src="assets/images/SB_cards/postman/size_2.jpg" alt="กลาง" class="portal-img-preview" style="height: 95px; border-radius: 8px;">
+          <img src="assets/images/SB_cards/postman/size_4.jpg" alt="ใหญ่" class="portal-img-preview" style="height: 115px; border-radius: 8px; transform: rotate(6deg);">
+        </div>
+
+        <div class="portal-content">
+          <h2 class="portal-title">เกมเรียงขนาดอาชีพในฝัน</h2>
+          <p class="portal-desc">เรียนรู้เปรียบเทียบขนาด เล็ก >> ใหญ่ และ ใหญ่ >> เล็ก 17 อาชีพแสนน่ารัก พร้อมเฟรมกระดานภาพวาดและเสียงพากย์สดใส</p>
+        </div>
+
+        <div class="portal-btn-play">
+          <span>เข้าเล่นเกม</span>
+          <span>➔</span>
+        </div>
+      </a>
+
+      <!-- Game 8: Event Sequencing (เกมเรียงลำดับเหตุการณ์ก่อน - หลัง 5 เรื่อง 25 ชิ้นส่วน) -->
+      <a href="event-sequencing.html" class="game-portal-card card-event-sequence">
+        <div class="portal-badge">
+          <span>⏳</span>
+          <span>5 เรื่อง (ก่อน - หลัง)</span>
+        </div>
+
+        <div class="portal-preview-wrap">
+          <img src="assets/images/before_after_cards/7eleven/card_1.jpg" alt="ก่อน" class="portal-img-preview" style="height: 105px; border-radius: 8px; transform: rotate(-5deg);">
+          <img src="assets/images/before_after_cards/teacher/card_3.jpg" alt="กลาง" class="portal-img-preview" style="height: 110px; border-radius: 8px;">
+          <img src="assets/images/before_after_cards/student/card_5.jpg" alt="หลัง" class="portal-img-preview" style="height: 105px; border-radius: 8px; transform: rotate(5deg);">
+        </div>
+
+        <div class="portal-content">
+          <h2 class="portal-title">เกมเรียงลำดับเหตุการณ์</h2>
+          <p class="portal-desc">ฝึกการคิดเชิงตรรกะและมิติเวลา เรียงลำดับเหตุการณ์ก่อน - หลัง 5 เรื่องน่ารัก พร้อมกระดานภาพวาดและเสียงพากย์สดใส</p>
+        </div>
+
+        <div class="portal-btn-play">
+          <span>เข้าเล่นเกม</span>
+          <span>➔</span>
+        </div>
+      </a>
+
+      <!-- Game 9: Thai Consonant Tracing (เกมเขียนตามรอยเส้นประ พยัญชนะไทย ก - ฮ 44 ตัวอักษร) -->
+      <a href="thai-tracing.html" class="game-portal-card card-thai-tracing">
+        <div class="portal-badge">
+          <span>✍️</span>
+          <span>44 พยัญชนะ (ก - ฮ)</span>
+        </div>
+
+        <div class="portal-preview-wrap">
+          <img src="assets/images/thai_letters/ko_kai.jpg" alt="ก ไก่" class="portal-img-preview" style="height: 105px; border-radius: 12px; transform: rotate(-5deg);">
+          <img src="assets/images/thai_letters/do_dek.jpg" alt="ด เด็ก" class="portal-img-preview" style="height: 110px; border-radius: 12px;">
+          <img src="assets/images/thai_letters/to_tao.jpg" alt="ต เต่า" class="portal-img-preview" style="height: 105px; border-radius: 12px; transform: rotate(5deg);">
+        </div>
+
+        <div class="portal-content">
+          <h2 class="portal-title">เกมเขียนตามรอยเส้นประ</h2>
+          <p class="portal-desc">ฝึกเขียนพยัญชนะไทย ก - ฮ 44 ตัวอักษร ลากนิ้วตามรอยเส้นประพร้อมลูกศรบอกทิศทาง มีโหมดเรียงและโหมดสุ่ม พร้อมเสียงอ่านคำกลอนสดใส</p>
+        </div>
+
+        <div class="portal-btn-play">
+          <span>เข้าเล่นเกม</span>
+          <span>➔</span>
+        </div>
+      </a>
+
+      <!-- Game 10: Thai Consonant Picture Matching (เกมเลือกพยัญชนะตรงกับรูปภาพ ก - ฮ 44 ตัวอักษร) -->
+      <a href="thai-select.html" class="game-portal-card card-thai-select">
+        <div class="portal-badge">
+          <span>🎯</span>
+          <span>44 พยัญชนะ (ก - ฮ)</span>
+        </div>
+
+        <div class="portal-preview-wrap">
+          <img src="assets/images/select_TH_cards/card_01_ko_kai.jpg" alt="ก ไก่" class="portal-img-preview" style="height: 105px; border-radius: 12px; transform: rotate(-5deg);">
+          <img src="assets/images/select_TH_cards/card_14_do_chada.jpg" alt="ฎ ชฎา" class="portal-img-preview" style="height: 110px; border-radius: 12px;">
+          <img src="assets/images/select_TH_cards/card_44_ho_nokhuk.jpg" alt="ฮ นกฮูก" class="portal-img-preview" style="height: 105px; border-radius: 12px; transform: rotate(5deg);">
+        </div>
+
+        <div class="portal-content">
+          <h2 class="portal-title">เกมเลือกพยัญชนะตรงกับรูป</h2>
+          <p class="portal-desc">เรียนรู้พยัญชนะไทย ก - ฮ 44 บัตรคำ สังเกตภาพแล้วเลือกตัวพยัญชนะที่ถูกต้อง พร้อมแอนิเมชันไม้หนีบและเสียงอ่านคำศัพท์สดใส</p>
+        </div>
+
+        <div class="portal-btn-play">
+          <span>เข้าเล่นเกม</span>
+          <span>➔</span>
+        </div>
+      </a>
+
+      <!-- Game 11: Living & Non-Living Classification (เกมจำแนกสิ่งมีชีวิตและสิ่งไม่มีชีวิต 36 บัตรภาพ) -->
+      <a href="living-classification.html" class="game-portal-card card-jamneak">
+        <div class="portal-badge">
+          <span>🌱</span>
+          <span>หน่วยวิทยาศาสตร์ (36 บัตรภาพ)</span>
+        </div>
+
+        <div class="portal-preview-wrap">
+          <img src="assets/images/jamneak/cards/card_pig.png" alt="หมู (สิ่งมีชีวิต)" class="portal-img-preview" style="height: 95px; border-radius: 8px; transform: rotate(-6deg);">
+          <img src="assets/images/jamneak/box_front_living.png" alt="กล่องสิ่งมีชีวิต" class="portal-img-preview" style="height: 105px; border-radius: 8px;">
+          <img src="assets/images/jamneak/cards/card_scissors.png" alt="กรรไกร (สิ่งไม่มีชีวิต)" class="portal-img-preview" style="height: 95px; border-radius: 8px; transform: rotate(6deg);">
+        </div>
+
+        <div class="portal-content">
+          <h2 class="portal-title">เกมจำแนกสิ่งมีชีวิต</h2>
+          <p class="portal-desc">เรียนรู้วิทยาศาสตร์ปฐมวัย สังเกตและจำแนกสิ่งมีชีวิตและสิ่งไม่มีชีวิตลงในกล่อง 2 กล่อง พร้อมพาเลต 3 ตัวเลือกสุ่มสลับซ้าย-ขวา</p>
+        </div>
+
+        <div class="portal-btn-play">
+          <span>เข้าเล่นเกม</span>
+          <span>➔</span>
+        </div>
+      </a>
+
+    </main>
+
+    <!-- Footer Credit -->
+    <footer class="menu-footer">
+      <span>สื่อการเรียนรู้เชิงปฏิสัมพันธ์ สอดคล้องกับหลักสูตรการศึกษาปฐมวัย</span>
+      <span class="version-tag-pill" style="margin-left: 8px;">v1.3.7</span>
+    </footer>
+
+  </div>
+
+  <!-- ASEAN Countries Info Modal (Opened by clicking ASEAN Logo) -->
+  <div class="asean-modal-overlay" id="aseanModalOverlay" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="asean-modal-card">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="ปิดหน้าต่าง">✕</button>
+      
+      <div class="asean-modal-header">
+        <div class="modal-logo-wrap">
+          <img src="assets/icons/asean_logo.png" alt="ตราสัญลักษณ์อาเซียน" class="modal-logo-img">
+        </div>
+        <div class="modal-header-text">
+          <h2 class="modal-title">ประเทศสมาชิกอาเซียน (11 ประเทศ)</h2>
+          <p class="modal-subtitle">รายชื่อ ธงชาติ และสถานที่สำคัญของสมาชิกสมาคมประชาชาติแห่งเอเชียตะวันออกเฉียงใต้</p>
+        </div>
+      </div>
+
+      <!-- 11 Countries Grid -->
+      <div class="asean-countries-grid" id="aseanCountriesGrid">
+        <!-- Injected via JavaScript from ASEAN_LANDMARKS -->
+      </div>
+
+      <div class="asean-modal-footer">
+        <button class="btn-close-modal" id="modalFooterCloseBtn">ปิดหน้าต่าง</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/audio.js?v=1.3.7"></script>
+  <script src="js/landmarks-data.js?v=1.3.7"></script>
+  <script>
+    // Audio and ASEAN Modal logic for Main Menu
+    document.addEventListener('DOMContentLoaded', () => {
+      // Horizontal mouse wheel scrolling for games hub grid on desktop
+      const hubGrid = document.querySelector('.games-hub-grid');
+      if (hubGrid) {
+        hubGrid.addEventListener('wheel', (e) => {
+          if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+            e.preventDefault();
+            hubGrid.scrollLeft += e.deltaY;
+          }
+        }, { passive: false });
+      }
+
+      const sound = new SoundManager();
+      const audioBtn = document.getElementById('audioToggleBtn');
+      const audioIcon = document.getElementById('audioIcon');
+
+      // Start BGM on first interaction
+      const startBgmOnce = () => {
+        sound.init();
+        sound.startBGM();
+        audioBtn.classList.add('active');
+        window.removeEventListener('pointerdown', startBgmOnce);
+      };
+      window.addEventListener('pointerdown', startBgmOnce);
+
+      audioBtn.addEventListener('click', () => {
+        const isMuted = sound.toggleMute();
+        if (isMuted) {
+          audioBtn.classList.remove('active');
+          audioIcon.innerHTML = `<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>`;
+        } else {
+          audioBtn.classList.add('active');
+          audioIcon.innerHTML = `<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>`;
+        }
+      });
+
+      // Sound on clicking portal cards
+      document.querySelectorAll('.game-portal-card').forEach(card => {
+        card.addEventListener('pointerdown', () => sound.playPop());
+      });
+
+      // ASEAN Modal
+      const modalOverlay = document.getElementById('aseanModalOverlay');
+      const emblemBtn = document.getElementById('aseanEmblemBtn');
+      const closeBtn = document.getElementById('modalCloseBtn');
+      const footerCloseBtn = document.getElementById('modalFooterCloseBtn');
+      const grid = document.getElementById('aseanCountriesGrid');
+
+      if (typeof ASEAN_LANDMARKS !== 'undefined' && grid) {
+        grid.innerHTML = ASEAN_LANDMARKS.map(item => `
+          <div class="country-modal-item">
+            <div class="modal-flag-wrap">${item.flagSvg}</div>
+            <div class="modal-country-info">
+              <div class="modal-country-name">${item.country}</div>
+              <div class="modal-country-en">${item.countryEn}</div>
+              <div class="modal-landmark-name">${item.landmarkName}</div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      if (emblemBtn) {
+        emblemBtn.addEventListener('click', () => {
+          sound.playPop();
+          modalOverlay.classList.add('active');
+        });
+      }
+
+      closeBtn.addEventListener('click', () => {
+        sound.playPop();
+        modalOverlay.classList.remove('active');
+      });
+
+      if (footerCloseBtn) {
+        footerCloseBtn.addEventListener('click', () => {
+          sound.playPop();
+          modalOverlay.classList.remove('active');
+        });
+      }
+
+      modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+          modalOverlay.classList.remove('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

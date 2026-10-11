@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>เกมจำแนกสิ่งมีชีวิตและสิ่งไม่มีชีวิต สำหรับเด็กปฐมวัย</title>
+  <link rel="stylesheet" href="css/style.css?v=1.3.7">
+  <link rel="stylesheet" href="css/jamneak.css?v=1.3.7">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&family=Prompt:wght@400;600;700;800&family=Mitr:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="jamneak-viewport">
+    <!-- 3D Pixar Preschool Ambient Background Layer -->
+    <div class="jamneak-bg-layer" aria-hidden="true"></div>
+
+    <!-- Header Controls (Standardized according to GAME_GUIDELINES.md) -->
+    <header class="jamneak-header">
+      <div class="header-left">
+        <!-- Home Button -->
+        <a href="index.html" class="action-btn" title="กลับสู่หน้าเมนูหลัก" style="text-decoration: none;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+          </svg>
+        </a>
+        <div class="round-badge-pill">
+          <span id="roundBadgeText">รอบที่ 1 / 12</span>
+        </div>
+        <span class="version-tag-pill">v1.3.7</span>
+      </div>
+
+      <!-- Center Title Pill -->
+      <div class="jamneak-title-pill">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#10b981">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+        </svg>
+        <h1>เกมจำแนกสิ่งมีชีวิต</h1>
+        <span class="title-subtag">หน่วยวิทยาศาสตร์</span>
+      </div>
+
+      <div class="header-right">
+        <!-- Score Badge -->
+        <div class="score-badge-pill">
+          <span id="scoreBadgeText">0 คะแนน</span>
+        </div>
+
+        <!-- Audio Toggle Button -->
+        <button class="action-btn" id="audioToggleBtn" title="เปิด/ปิด เสียง">
+          <svg id="audioIcon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+          </svg>
+        </button>
+
+        <!-- Reset Round Button -->
+        <button class="action-btn" id="btnResetBoard" title="เริ่มรอบนี้ใหม่ / สุ่มบัตรภาพใหม่">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Sub Instruction Banner -->
+    <div class="instruction-banner">
+      <span>✨ แตะเลือกหรือลากบัตรภาพ 3 ตัวเลือก</span>
+      <span>➔</span>
+      <span>ไปใส่ใน <strong class="instruction-highlight">กล่องสิ่งมีชีวิต (ซ้าย)</strong> หรือ <strong class="instruction-highlight">กล่องสิ่งไม่มีชีวิต (ขวา)</strong> ให้ถูกต้องนะจ๊ะ ✨</span>
+    </div>
+
+    <!-- Main Game Arena (Dynamic Left / Right Layout based on palettePosition) -->
+    <main class="jamneak-arena layout-palette-left" id="jamneakArena">
+
+      <!-- Choices Palette (พาเลตตัวเลือก 3 ตัวเลือก สุ่มเปลี่ยนข้างซ้าย/ขวาเมื่อเริ่มเกมถัดไป) -->
+      <section class="palette-container" id="paletteContainer" aria-label="พาเลตตัวเลือกบัตรภาพ">
+        <div class="palette-header">
+          <div class="palette-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            <span>บัตรภาพตัวเลือก (3 ใบ)</span>
+          </div>
+          <span class="palette-counter" id="paletteSideTag">พาเลตอยู่ด้านซ้าย</span>
+        </div>
+
+        <div class="palette-cards-list" id="paletteCardsList">
+          <!-- Dynamically populated with 3 choice cards -->
+        </div>
+      </section>
+
+      <!-- Target Boxes Container (กล่องด้านซ้าย: สิ่งมีชีวิต, กล่องด้านขวา: สิ่งไม่มีชีวิต) -->
+      <section class="boxes-container" id="boxesContainer">
+
+        <!-- 1. Left Box: สิ่งมีชีวิต (Living Things) -->
+        <div class="sort-box-unit box-living" id="boxLiving" role="region" aria-label="กล่องสิ่งมีชีวิต">
+          <div class="box-header">
+            <div class="box-header-badge">
+              <span>🌱</span>
+              <span>กล่องสิ่งมีชีวิต</span>
+            </div>
+            <div class="box-count-badge" id="countLivingText">หย่อนแล้ว 0 ใบ</div>
+          </div>
+
+          <!-- Top Drop Slot (ช่องหย่อนบัตรภาพ) -->
+          <div class="box-drop-slot" title="แตะหรือลากบัตรภาพมาหย่อนลงในกล่องนี้">
+            <svg class="drop-slot-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"/>
+            </svg>
+            <span>แตะหรือหย่อนใส่กล่องนี้</span>
+          </div>
+
+          <!-- Box Front Graphic (Authentic Cropped Artwork from PDF) -->
+          <div class="box-graphic-area">
+            <img src="assets/images/jamneak/box_front_living.png" alt="กล่องสิ่งมีชีวิต" class="box-graphic-img" draggable="false">
+            <div class="box-sorted-stack" id="stackLiving"></div>
+          </div>
+        </div>
+
+        <!-- 2. Right Box: สิ่งไม่มีชีวิต (Non-Living Things) -->
+        <div class="sort-box-unit box-nonliving" id="boxNonLiving" role="region" aria-label="กล่องสิ่งไม่มีชีวิต">
+          <div class="box-header">
+            <div class="box-header-badge">
+              <span>⚙️</span>
+              <span>กล่องสิ่งไม่มีชีวิต</span>
+            </div>
+            <div class="box-count-badge" id="countNonLivingText">หย่อนแล้ว 0 ใบ</div>
+          </div>
+
+          <!-- Top Drop Slot (ช่องหย่อนบัตรภาพ) -->
+          <div class="box-drop-slot" title="แตะหรือลากบัตรภาพมาหย่อนลงในกล่องนี้">
+            <svg class="drop-slot-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"/>
+            </svg>
+            <span>แตะหรือหย่อนใส่กล่องนี้</span>
+          </div>
+
+          <!-- Box Front Graphic (Authentic Cropped Artwork from PDF) -->
+          <div class="box-graphic-area">
+            <img src="assets/images/jamneak/box_front_nonliving.png" alt="กล่องสิ่งไม่มีชีวิต" class="box-graphic-img" draggable="false">
+            <div class="box-sorted-stack" id="stackNonLiving"></div>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Round Clear Victory Celebration Overlay -->
+  <div class="round-clear-overlay" id="roundClearModal" role="dialog" aria-modal="true">
+    <div class="round-clear-card">
+      <div class="round-clear-stars">🌟 🎉 🌟</div>
+      <h2 class="round-clear-title" id="clearModalTitle">🎉 ผ่านรอบแล้ว!</h2>
+      <p class="round-clear-desc" id="clearModalDesc">เก่งมากๆ หนูๆ จำแนกสิ่งมีชีวิตและสิ่งไม่มีชีวิตได้อย่างถูกต้อง</p>
+      <button class="btn-next-round" id="btnNextRound">
+        <span>ไปรอบถัดไป</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/audio.js?v=1.3.7"></script>
+  <script src="js/jamneak-data.js?v=1.3.7"></script>
+  <script src="js/jamneak-game.js?v=1.3.7"></script>
+</body>
+</html>

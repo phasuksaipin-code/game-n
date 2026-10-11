@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>เกมฝึกเขียนตามรอยเส้นประ พยัญชนะไทย ก - ฮ สำหรับเด็กปฐมวัย</title>
+  <link rel="stylesheet" href="css/style.css?v=1.3.7">
+  <link rel="stylesheet" href="css/thai-tracing.css?v=1.3.7">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800&family=Krub:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="tracing-viewport">
+    <!-- Animated Schoolhouse & Rainbow Background Layer -->
+    <div class="tracing-bg-layer" aria-hidden="true"></div>
+
+    <!-- Top Header -->
+    <header class="tracing-header">
+      <div class="header-left">
+        <!-- Back to Hub (Unified Circular Blue) -->
+        <a href="index.html" class="action-btn" title="กลับหน้าเมนูหลัก" style="text-decoration: none;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+          </svg>
+        </a>
+        <span class="version-tag-pill">v1.3.7</span>
+      </div>
+
+      <!-- Title Pill -->
+      <div class="tracing-title-pill">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#0284c7">
+          <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+        </svg>
+        <h1>เขียนตามรอยเส้นประพยัญชนะไทย</h1>
+        <span class="mode-badge-pill" id="modeBadge">โหมดเรียงตามตัวอักษร</span>
+      </div>
+
+      <div class="header-right">
+        <!-- Sound & Music Toggle -->
+        <button class="action-btn" id="audioToggleBtn" title="เปิด/ปิด เสียงดนตรี">
+          <svg id="audioIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+          </svg>
+        </button>
+
+        <!-- Reset / Clear Drawing Button -->
+        <button class="action-btn" id="btnResetBoard" title="เริ่มเขียนใหม่ / รีเซ็ต">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+          </svg>
+        </button>
+
+        <!-- 44 Consonants Quick Picker Modal Button -->
+        <button class="action-btn" id="btnOpenLetterPicker" title="เลือกตัวอักษร ก - ฮ">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Sub-Navigation & Mode Selector Bar -->
+    <nav class="tracing-subnav" aria-label="แถบควบคุมตัวอักษร">
+      <button class="nav-arrow-btn" id="btnPrevLetter" title="ตัวอักษรก่อนหน้า">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        <span>ก่อนหน้า</span>
+      </button>
+
+      <div class="current-letter-pill" id="currentLetterBadge">
+        <span class="index-badge">1/44</span>
+        <span>ก ไก่</span>
+      </div>
+
+      <button class="nav-arrow-btn" id="btnNextLetter" title="ตัวอักษรถัดไป">
+        <span>ถัดไป</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+      </button>
+
+      <button class="nav-arrow-btn" id="btnRandomLetter" title="สุ่มตัวใหม่" style="display: none; background: #fdf2f8; border-color: #f472b6; color: #db2777;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg>
+        <span>สุ่มตัวใหม่</span>
+      </button>
+
+      <!-- Mode Toggle Switch -->
+      <div class="mode-toggle-group" aria-label="เลือกโหมด">
+        <button class="mode-tab-btn active" id="btnModeSeq" title="เล่นเรียง ก ถึง ฮ">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+          <span>เรียงอักษร</span>
+        </button>
+        <button class="mode-tab-btn" id="btnModeRand" title="เล่นแบบสุ่ม">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg>
+          <span>สุ่มอักษร</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main Play Arena (1 Letter + 1 Picture per screen, perfectly auto-fitted) -->
+    <main class="tracing-play-arena">
+
+      <!-- Left Column: Tracing Slate (กระดานเขียนตามรอยแม่แบบสีเทา) -->
+      <section class="tracing-slate-wrapper" aria-label="กระดานฝึกเขียนตามรอยเส้นประ">
+        <!-- Slate Toolbar -->
+        <div class="slate-toolbar">
+          <!-- Crayon Selector -->
+          <div class="crayon-picker-bar" aria-label="เลือกสีดินสอสี">
+            <button class="crayon-btn crayon-rainbow active" data-color="rainbow" title="สีสายรุ้งวิเศษ"></button>
+            <button class="crayon-btn" data-color="#ef4444" style="background: #ef4444;" title="สีแดง"></button>
+            <button class="crayon-btn" data-color="#f97316" style="background: #f97316;" title="สีส้ม"></button>
+            <button class="crayon-btn" data-color="#eab308" style="background: #eab308;" title="สีเหลือง"></button>
+            <button class="crayon-btn" data-color="#22c55e" style="background: #22c55e;" title="สีเขียว"></button>
+            <button class="crayon-btn" data-color="#0284c7" style="background: #0284c7;" title="สีฟ้า"></button>
+            <button class="crayon-btn" data-color="#a855f7" style="background: #a855f7;" title="สีม่วง"></button>
+            <button class="crayon-btn" data-color="#ec4899" style="background: #ec4899;" title="สีชมพู"></button>
+          </div>
+
+          <!-- Tools -->
+          <div class="slate-tool-actions">
+            <button class="tool-action-btn" id="btnUndo" title="ย้อนกลับเส้นล่าสุด">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
+              <span>ย้อนกลับ</span>
+            </button>
+            <button class="tool-action-btn" id="btnClear" title="ล้างกระดานเขียนใหม่">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.36 10.04l-2.34-2.34c-.78-.78-2.05-.78-2.83 0L3.71 18.18c-.78.78-.78 2.05 0 2.83.39.39.9.59 1.41.59s1.02-.2 1.41-.59L17.02 10.5l2.34 2.34 1.41-1.41-1.41-1.39zm-3.75-2.34l2.34 2.34-1.41 1.41-2.34-2.34 1.41-1.41z"/></svg>
+              <span>ล้างกระดาน</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tracing Board Canvas Box -->
+        <div class="tracing-board" id="tracingBoard">
+          <!-- Preschool Thai Notebook Guidelines (เส้นบรรทัดคัดไทยอนุบาล 4 เส้น) -->
+          <svg class="notebook-guidelines" viewBox="0 0 400 400" preserveAspectRatio="none">
+            <line x1="0" y1="50" x2="400" y2="50" />
+            <line x1="0" y1="150" x2="400" y2="150" class="mid-line" />
+            <line x1="0" y1="250" x2="400" y2="250" class="mid-line" />
+            <line x1="0" y1="350" x2="400" y2="350" />
+          </svg>
+
+          <!-- Authentic Thai Consonant Template SVG (แม่แบบพยัญชนะสีเทาตัวใหญ่เต็มกรอบ) -->
+          <svg class="guide-svg-layer" id="guideSvg" viewBox="0 0 400 400">
+            <!-- 1. Soft Gray Fill Base ("ทำเป็นเทาๆ") -->
+            <text id="tplTextBase" class="tpl-glyph-base" x="200" y="348" text-anchor="middle">ก</text>
+            
+            <!-- 2. Clean Dark-Gray Outline (แบบคัดโครงร่างแม่แบบ ตามรูปที่แนบมา) -->
+            <text id="tplTextOutline" class="tpl-glyph-outline" x="200" y="348" text-anchor="middle">ก</text>
+            
+            <!-- 3. Dashed Centerline Guide (เส้นประสำหรับลากตามรอย) -->
+            <text id="tplTextDashed" class="tpl-glyph-dashed" x="200" y="348" text-anchor="middle">ก</text>
+          </svg>
+
+          <!-- Touch / Mouse Drawing Canvas -->
+          <canvas class="tracing-canvas" id="tracingCanvas"></canvas>
+        </div>
+
+        <!-- Tracing Progress Bar -->
+        <div class="slate-progress-bar-wrap">
+          <div class="progress-header">
+            <span>ความก้าวหน้าการเขียน</span>
+            <span id="progressPercentText">0%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Letter & Picture Card (1 รูปต่อ 1 หน้า) -->
+      <section class="letter-picture-card" aria-label="การ์ดคำศัพท์และภาพประกอบ">
+        <!-- Letter Big Header with Standard Looped Font -->
+        <div class="letter-header-group">
+          <div class="big-letter-badge" id="cardLetterBadge">ก</div>
+          <div class="letter-title-texts">
+            <h2 class="letter-main-name" id="cardLetterName">ก ไก่</h2>
+            <div class="letter-phonetic" id="cardLetterPhonetic">(กอ)</div>
+          </div>
+        </div>
+
+        <!-- Rhyme Pill -->
+        <div class="letter-rhyme-pill" id="cardLetterRhyme">
+          ก.เอ๋ย กอไก่
+        </div>
+
+        <!-- Mascot Illustration Picture Frame -->
+        <div class="mascot-image-frame">
+          <img id="cardMascotImg" src="assets/images/thai_letters/ko_kai.jpg" alt="ก ไก่" class="mascot-img">
+        </div>
+
+        <!-- Writing Instruction Tip -->
+        <div class="writing-tip-box" id="cardWritingTip">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#0284c7" style="flex-shrink: 0;"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg>
+          <span><strong>วิธีเขียน:</strong> เริ่มจากล่างซ้าย ลากขึ้นไปทำปากไก่ โค้งมนหลังคา แล้วลากลงมาทางขวา</span>
+        </div>
+
+        <!-- Pronunciation Speech Button -->
+        <div class="card-actions-bar">
+          <button class="speech-btn" id="btnPlaySpeech" title="ฟังเสียงอ่านภาษาไทย">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+            <span>ฟังเสียงอ่าน</span>
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Modal 1: 44 Consonants Quick Picker Grid (ก - ฮ) -->
+    <div class="modal-overlay" id="letterPickerModal" aria-modal="true" role="dialog">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#0284c7"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+            <span>เลือกพยัญชนะไทย (44 ตัวอักษร ก - ฮ)</span>
+          </div>
+          <button class="modal-close-btn" id="btnClosePicker" title="ปิดหน้าต่าง">✕</button>
+        </div>
+        <div class="letter-grid-44" id="letterGrid44">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 2: Success Celebration Popup -->
+    <div class="modal-overlay" id="celebrationModal" aria-modal="true" role="dialog">
+      <div class="modal-card celebration-modal-card">
+        <div class="celebration-stars">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#facc15"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="#facc15"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#facc15"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        </div>
+        <h2 class="celebration-title">เก่งมากเลยครับ/ค่ะ!</h2>
+        <p class="celebration-sub">
+          หนูเขียนตัว <strong id="celebrationChar" style="color: #ec4899; font-size: 1.4rem;">ก</strong> ได้สวยงามและถูกต้องมากเลย!
+        </p>
+        <div class="celebration-buttons">
+          <button class="btn-celebration-action btn-celebration-retry" id="btnRetryCelebration">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+            <span>เขียนอีกรอบ</span>
+          </button>
+          <button class="btn-celebration-action" id="btnNextCelebration">
+            <span>ฝึกตัวต่อไป</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confettiCanvas"></canvas>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/audio.js?v=1.3.7"></script>
+  <script src="js/thai-tracing-data.js?v=1.3.7"></script>
+  <script src="js/thai-tracing-game.js?v=1.3.7"></script>
+</body>
+</html>

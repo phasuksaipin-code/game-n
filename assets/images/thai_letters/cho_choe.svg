@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <!-- 3D Studio Background -->
+    <radialGradient id="bgGlow" cx="45%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="55%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </radialGradient>
+    
+    <!-- 3D Ground Contact Shadow Filter -->
+    <filter id="groundShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+    
+    <!-- 3D Volumetric Depth Drop Shadow Filter -->
+    <filter id="clayShadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#0f172a" flood-opacity="0.22"/>
+    </filter>
+    
+    <!-- Specular Flare Filter -->
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <radialGradient id="treeCanopy" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#86efac"/>
+      <stop offset="45%" stop-color="#22c55e"/>
+      <stop offset="85%" stop-color="#15803d"/>
+      <stop offset="100%" stop-color="#14532d"/>
+    </radialGradient>
+    <linearGradient id="treeTrunk" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a16207"/>
+      <stop offset="50%" stop-color="#78350f"/>
+      <stop offset="100%" stop-color="#451a03"/>
+    </linearGradient>
+
+  </defs>
+
+  <!-- Studio Backdrop Card -->
+  <rect width="500" height="500" rx="36" fill="url(#bgGlow)"/>
+  
+  <!-- Ground Shadow -->
+  <ellipse cx="250" cy="445" rx="145" ry="24" fill="#64748b" opacity="0.35" filter="url(#groundShadow)"/>
+  <ellipse cx="250" cy="445" rx="85" ry="14" fill="#1e293b" opacity="0.45" filter="url(#groundShadow)"/>
+
+  <!-- 3D Model Layer -->
+  <g filter="url(#clayShadow)">
+
+    <!-- Sturdy Wooden Tree Trunk -->
+    <path d="M 210 270 L 200 435 Q 250 445 300 435 L 290 270 Z" fill="url(#treeTrunk)"/>
+
+    <!-- Lush Volumetric 3D Foliage Clouds -->
+    <circle cx="170" cy="200" r="75" fill="url(#treeCanopy)"/>
+    <circle cx="330" cy="200" r="75" fill="url(#treeCanopy)"/>
+    <circle cx="250" cy="140" r="85" fill="url(#treeCanopy)"/>
+    <circle cx="250" cy="220" r="80" fill="url(#treeCanopy)"/>
+
+    <!-- Apples / Flowers in Foliage -->
+    <circle cx="160" cy="180" r="12" fill="#ef4444"/>
+    <circle cx="340" cy="180" r="12" fill="#ef4444"/>
+    <circle cx="250" cy="110" r="14" fill="#ef4444"/>
+
+    <!-- Friendly Face on Tree Trunk -->
+    <circle cx="230" cy="340" r="11" fill="#ffffff"/>
+    <circle cx="270" cy="340" r="11" fill="#ffffff"/>
+    <circle cx="232" cy="340" r="7" fill="#0f172a"/>
+    <circle cx="268" cy="340" r="7" fill="#0f172a"/>
+    <path d="M 238 370 Q 250 385 262 370" fill="none" stroke="#451a03" stroke-width="4" stroke-linecap="round"/>
+
+  </g>
+</svg>

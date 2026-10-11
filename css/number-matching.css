@@ -1,0 +1,747 @@
+/* ==========================================================================
+   Number Matching Game (เกมโยงเส้นจับคู่ตัวเลขอารบิกกับเลขไทย 1-99)
+   High-contrast, playful, responsive, preschool-friendly design.
+   ========================================================================== */
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: auto;
+  background-color: #ede9fe;
+  background-image: url('../assets/images/bg-numbers.jpg?v=1.3.7');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.number-viewport {
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: clamp(6px, 1.2vh, 12px) clamp(8px, 2vw, 20px);
+  overflow-x: hidden;
+  overflow-y: visible;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+/* Background Atmosphere Layer (Blurred matching the first game) */
+.number-bg-layer {
+  position: fixed;
+  inset: -16px;
+  background-image: url('../assets/images/bg-numbers.jpg?v=1.3.7');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  filter: blur(3.5px) brightness(0.98);
+  transform: scale(1.03);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Header */
+.number-header {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  gap: clamp(6px, 1.5vw, 12px);
+}
+
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 1vw, 10px);
+}
+
+/* Audio, Home, Refresh & Common Action Buttons (Unified Project-wide) */
+.action-btn, .btn-nav-home, .btn-action-icon {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.action-btn:hover, .btn-nav-home:hover, .btn-action-icon:hover {
+  transform: scale(1.12);
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.45);
+}
+
+.action-btn:active, .btn-nav-home:active, .btn-action-icon:active {
+  transform: scale(0.92);
+}
+
+.action-btn.active, .btn-action-icon.active {
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.action-btn svg, .btn-nav-home svg, .btn-action-icon svg {
+  display: block;
+  fill: currentColor;
+  pointer-events: none;
+}
+
+/* Version Indicator Pill (Project-wide +1 Tracking) */
+.version-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1.5px solid #0284c7;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #0369a1;
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.18);
+  white-space: nowrap;
+  letter-spacing: 0.4px;
+  pointer-events: none;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* Center Title Pill */
+.number-title-pill {
+  background: #ffffff;
+  border: clamp(2px, 0.4vh, 3px) solid #8b5cf6;
+  border-radius: 999px;
+  padding: clamp(3px, 0.8vh, 6px) clamp(8px, 1.5vw, 20px);
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.16);
+  display: flex;
+  align-items: center;
+  gap: clamp(4px, 1vw, 10px);
+  max-width: calc(100% - 100px);
+}
+
+.number-title-pill h1 {
+  margin: 0;
+  font-size: clamp(0.85rem, 2vh, 1.15rem);
+  font-weight: 800;
+  color: #1e1b4b;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.round-badge-pill {
+  background: #8b5cf6;
+  color: #ffffff;
+  font-size: clamp(0.65rem, 1.3vh, 0.78rem);
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  box-shadow: 0 2px 6px rgba(139, 92, 246, 0.3);
+  white-space: nowrap;
+}
+
+.counter-badge-pill {
+  background: #ecfdf5;
+  color: #059669;
+  border: 1.5px solid #a7f3d0;
+  font-size: clamp(0.65rem, 1.3vh, 0.78rem);
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* Tip / Instruction Bar */
+.instruction-bar {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  font-size: clamp(0.72rem, 1.5vh, 0.92rem);
+  font-weight: 700;
+  color: #475569;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: clamp(2px, 0.5vh, 4px) clamp(10px, 2vw, 20px);
+  border-radius: 999px;
+  margin: clamp(2px, 0.5vh, 4px) auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  max-width: 95%;
+}
+
+/* Main Playing Arena */
+.matching-arena {
+  position: relative;
+  z-index: 5;
+  flex: 1;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: clamp(4px, 0.8vh, 8px) clamp(4px, 1.5vw, 16px);
+  box-sizing: border-box;
+  min-height: 0;
+  gap: clamp(8px, 2vw, 20px);
+}
+
+/* SVG Line Canvas Overlay (Spans entire arena) */
+.lines-svg-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 15;
+  overflow: visible;
+}
+
+/* Connection line styles */
+.connection-line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15));
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+.connection-line.drawing {
+  stroke-dasharray: 8 6;
+  animation: lineDashAnim 0.8s linear infinite;
+}
+
+@keyframes lineDashAnim {
+  to { stroke-dashoffset: -28; }
+}
+
+.connection-line.shake-error {
+  animation: lineShake 0.4s ease-in-out;
+}
+
+@keyframes lineShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+/* Columns (Left: Arabic, Right: Thai) */
+.column-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
+  width: clamp(135px, 28vw, 250px);
+  z-index: 20;
+  gap: clamp(4px, 1vh, 8px);
+}
+
+.column-header {
+  text-align: center;
+  font-size: clamp(0.78rem, 1.6vh, 0.95rem);
+  font-weight: 800;
+  padding: clamp(3px, 0.6vh, 5px) clamp(6px, 1.2vw, 12px);
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.column-arabic .column-header {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  color: #1d4ed8;
+  border: 2px solid #bfdbfe;
+}
+
+.column-thai .column-header {
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+  color: #7e22ce;
+  border: 2px solid #e9d5ff;
+}
+
+/* Cards Stack */
+.cards-stack {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(4px, 1vh, 8px);
+  min-height: 0;
+}
+
+/* Individual Number Card */
+.number-card {
+  position: relative;
+  background: #ffffff;
+  border: clamp(2px, 0.4vh, 3px) solid #e2e8f0;
+  border-radius: clamp(14px, 2vh, 20px);
+  padding: clamp(2px, 0.6vh, 6px) clamp(6px, 1.2vw, 14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y; /* Allows vertical scrolling on touch devices while allowing horizontal drag */
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s, border-color 0.22s, background-color 0.22s;
+  min-height: clamp(38px, 6.8vh, 60px);
+  box-sizing: border-box;
+}
+
+.number-card:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 18px rgba(139, 92, 246, 0.18);
+  border-color: #8b5cf6;
+}
+
+/* Selected state (tap to select) */
+.number-card.selected {
+  border-color: #f59e0b;
+  background: #fffbeb;
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.25), 0 8px 20px rgba(245, 158, 11, 0.2);
+  transform: scale(1.05);
+  animation: cardPulse 1.2s infinite ease-in-out;
+}
+
+@keyframes cardPulse {
+  0%, 100% { transform: scale(1.05); }
+  50% { transform: scale(1.08); }
+}
+
+/* Matched state */
+.number-card.is-matched {
+  cursor: default;
+  transform: scale(1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.number-card.is-matched:hover {
+  transform: scale(1);
+}
+
+/* Shake on wrong match */
+.number-card.shake-error {
+  animation: cardShake 0.4s ease-in-out;
+  border-color: #ef4444 !important;
+  background: #fef2f2 !important;
+}
+
+@keyframes cardShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-7px); }
+  75% { transform: translateX(7px); }
+}
+
+/* Card Content: Big Number + Thai word reading */
+.card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  pointer-events: none;
+}
+
+.num-display {
+  font-family: 'Prompt', sans-serif;
+  font-size: clamp(1.2rem, 3.2vh, 1.85rem);
+  font-weight: 800;
+  line-height: 1.05;
+  color: #1e293b;
+  letter-spacing: 0.5px;
+}
+
+.column-arabic .num-display {
+  color: #1e40af;
+}
+
+.column-thai .num-display {
+  font-family: 'Sarabun', 'TH Sarabun New', sans-serif;
+  color: #5b21b6;
+  font-size: clamp(1.35rem, 3.8vh, 2.35rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 1px;
+}
+
+.num-word-pill {
+  font-size: clamp(0.55rem, 1.2vh, 0.7rem);
+  font-weight: 600;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 1px 6px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.number-card.selected .num-word-pill {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+/* Anchor Connector Dot */
+.connector-dot {
+  position: absolute;
+  width: clamp(14px, 2vh, 18px);
+  height: clamp(14px, 2vh, 18px);
+  border-radius: 50%;
+  background: #ffffff;
+  border: clamp(2.5px, 0.4vh, 3.5px) solid #94a3b8;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s, border-color 0.2s;
+  pointer-events: auto;
+  cursor: crosshair;
+  touch-action: none; /* Initiates line drawing directly from dot */
+}
+
+/* Left side cards have dot on the right edge */
+.column-arabic .connector-dot {
+  right: clamp(-7px, -1vh, -9px);
+}
+
+/* Right side cards have dot on the left edge */
+.column-thai .connector-dot {
+  left: clamp(-7px, -1vh, -9px);
+}
+
+.number-card:hover .connector-dot,
+.number-card.selected .connector-dot {
+  transform: scale(1.3);
+  border-color: #8b5cf6;
+  background: #f5f3ff;
+}
+.number-card.selected .connector-dot {
+  transform: scale(1.35);
+  border-color: #8b5cf6;
+  background: #f5f3ff;
+}
+
+.number-card.is-matched .connector-dot {
+  border-color: currentColor;
+  background: currentColor;
+}
+
+/* Success Checkmark Badge */
+.match-check-badge {
+  position: absolute;
+  top: -6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #10b981;
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4);
+  animation: popBadge 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.column-arabic .match-check-badge {
+  left: -6px;
+}
+.column-thai .match-check-badge {
+  right: -6px;
+}
+
+@keyframes popBadge {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Center Spacer with Playful Mascot / Illustration */
+.arena-center-guide {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0.7;
+}
+
+.center-icon-badge {
+  font-size: 3rem;
+  animation: floatEmoji 2.5s infinite ease-in-out alternate;
+}
+
+@keyframes floatEmoji {
+  0% { transform: translateY(0) rotate(-4deg); }
+  100% { transform: translateY(-10px) rotate(4deg); }
+}
+
+/* Celebration Overlay Modal */
+.celebration-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.celebration-overlay.active {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.celebration-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 28px;
+  padding: clamp(20px, 4vh, 32px) clamp(16px, 4vw, 36px);
+  text-align: center;
+  max-width: 480px;
+  width: 90%;
+  max-height: 90vh;
+  max-height: 90dvh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  transform: scale(0.85) translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.celebration-overlay.active .celebration-card {
+  transform: scale(1) translateY(0);
+}
+
+.celebration-badge-icon {
+  font-size: clamp(44px, 8vh, 64px);
+  margin-bottom: 6px;
+  animation: bounceEmoji 1s infinite alternate;
+}
+
+@keyframes bounceEmoji {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+.celebration-title {
+  margin: 0 0 6px;
+  font-size: clamp(1.4rem, 3.5vh, 1.8rem);
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.celebration-subtitle {
+  margin: 0 0 16px;
+  font-size: clamp(0.9rem, 2vh, 1.05rem);
+  color: #64748b;
+  line-height: 1.4;
+}
+
+.matched-summary-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.summary-pill {
+  background: #f5f3ff;
+  border: 1.5px solid #ddd6fe;
+  border-radius: 999px;
+  padding: 3px 12px;
+  font-size: clamp(0.85rem, 1.8vh, 0.95rem);
+  font-weight: 800;
+  color: #6d28d9;
+}
+
+.celebration-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn-celebration-next, .btn-celebration-replay {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: clamp(0.9rem, 2vh, 1rem);
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: transform 0.18s, box-shadow 0.18s;
+  touch-action: manipulation;
+}
+
+.btn-celebration-next {
+  background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+  color: #ffffff;
+}
+
+.btn-celebration-replay {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.btn-celebration-next:hover, .btn-celebration-replay:hover {
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* Confetti Canvas */
+#confettiCanvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99998;
+}
+
+/* Responsive Adaptations for Mobile & Tablets */
+@media (max-width: 768px) {
+  .number-viewport {
+    padding: clamp(4px, 1vh, 8px) 8px;
+  }
+
+  .number-header {
+    gap: 6px;
+  }
+
+  .number-title-pill {
+    padding: 3px 10px;
+    max-width: calc(100% - 94px);
+  }
+
+  .number-title-pill h1 {
+    font-size: 0.85rem;
+  }
+
+  .round-badge-pill {
+    display: none; /* Hide round badge in header on narrow mobile to keep title spacious */
+  }
+
+  .matching-arena {
+    padding: 2px 4px;
+    gap: 6px;
+  }
+
+  .column-container {
+    width: clamp(120px, 44vw, 160px);
+    gap: 4px;
+  }
+
+  .column-header {
+    font-size: 0.78rem;
+    padding: 3px 8px;
+  }
+
+  .cards-stack {
+    gap: clamp(3px, 0.8vh, 6px);
+  }
+
+  .number-card {
+    padding: 2px 6px;
+    min-height: clamp(36px, 6.2vh, 48px);
+    border-radius: 14px;
+  }
+
+  .num-display {
+    font-size: clamp(1.1rem, 2.6vh, 1.4rem);
+  }
+
+  .column-thai .num-display {
+    font-size: clamp(1.2rem, 3vh, 1.75rem);
+    font-weight: 700;
+  }
+
+  .num-word-pill {
+    font-size: 0.55rem;
+    padding: 0 4px;
+  }
+
+  .arena-center-guide {
+    display: none;
+  }
+}
+
+/* Extra small screens or landscape on mobile phones (very short screen height) */
+@media (max-height: 520px) {
+  .number-viewport {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 4px 8px;
+  }
+
+  .instruction-bar {
+    display: none; /* Save vertical space in short height viewports */
+  }
+
+  .cards-stack {
+    gap: 3px;
+  }
+
+  .number-card {
+    min-height: 34px;
+    padding: 2px 6px;
+  }
+
+  .num-display {
+    font-size: 1.05rem;
+  }
+
+  .column-thai .num-display {
+    font-size: 1.25rem;
+  }
+
+  .num-word-pill {
+    display: none; /* Hide subtitle word pill in landscape so numbers remain large */
+  }
+}

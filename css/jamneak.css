@@ -1,0 +1,902 @@
+/* jamneak.css - สไตล์สำหรับเกมจำแนกสิ่งมีชีวิตและสิ่งไม่มีชีวิต */
+/* สอดคล้องกับมาตรฐาน GAME_GUIDELINES.md: 100% Viewport, Zero Scrollbar, 3D Preschool Theme */
+
+:root {
+  --living-color: #ec4899;
+  --living-glow: rgba(236, 72, 153, 0.4);
+  --nonliving-color: #0284c7;
+  --nonliving-glow: rgba(2, 132, 199, 0.4);
+  --bg-overlay-grad: radial-gradient(circle at center, rgba(255, 255, 255, 0.5) 0%, rgba(240, 249, 255, 0.78) 100%);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+  font-family: 'Sarabun', 'Prompt', sans-serif;
+  background-color: #e0f2fe;
+}
+
+/* 1. Background Layer */
+.jamneak-bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: url('../assets/images/bg_jamneak.jpg?v=1.3.7');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  filter: saturate(1.05) brightness(1.02);
+  pointer-events: none;
+}
+
+.jamneak-bg-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--bg-overlay-grad);
+  pointer-events: none;
+}
+
+/* 2. Main Viewport (100% Viewport Zero Scrollbar) */
+.jamneak-viewport {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
+  padding: 6px 14px;
+  gap: 6px;
+  box-sizing: border-box;
+}
+
+/* 3. Header Controls */
+.jamneak-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  flex: 0 0 48px;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 4px;
+  position: relative;
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Unified Action Buttons */
+.action-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.45);
+}
+
+.action-btn:active {
+  transform: scale(0.94);
+}
+
+.version-tag-pill {
+  font-size: 11px;
+  font-weight: 700;
+  color: #0369a1;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 3px 8px;
+  border-radius: 20px;
+  border: 1.5px solid #bae6fd;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.round-badge-pill {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #10b981, #059669);
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 3px 8px rgba(16, 185, 129, 0.35);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.score-badge-pill {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 3px 8px rgba(245, 158, 11, 0.35);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Center Title Pill */
+.jamneak-title-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 5px 20px;
+  border-radius: 30px;
+  border: 3px solid #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.jamneak-title-pill h1 {
+  font-size: 19px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.title-subtag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  padding: 2px 10px;
+  border-radius: 12px;
+}
+
+/* Sub-Instruction Banner */
+.instruction-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid #ffffff;
+  border-radius: 14px;
+  padding: 3px 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+  text-align: center;
+  flex: 0 0 auto;
+  max-width: 95%;
+  margin: 0 auto;
+  z-index: 90;
+  box-sizing: border-box;
+}
+
+.instruction-highlight {
+  color: #0284c7;
+  font-weight: 800;
+}
+
+/* 4. Game Main Layout (Arena) */
+.jamneak-arena {
+  flex: 1 1 0;
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Left / Right Palette Transition */
+.jamneak-arena.layout-palette-left {
+  flex-direction: row;
+}
+
+.jamneak-arena.layout-palette-right {
+  flex-direction: row-reverse;
+}
+
+/* 5. Choices Palette (พาเลตตัวเลือก 3 ตัวเลือก) */
+.palette-container {
+  flex: 0 0 clamp(240px, 22vw, 290px);
+  width: clamp(240px, 22vw, 290px);
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.94);
+  border: 3px solid #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 8px 10px;
+  gap: 6px;
+  backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: transform 0.35s ease;
+}
+
+.palette-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 4px 6px;
+  border-bottom: 2px dashed #e2e8f0;
+  flex: 0 0 auto;
+}
+
+.palette-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.palette-counter {
+  font-size: 11px;
+  font-weight: 800;
+  background: #f1f5f9;
+  color: #475569;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.palette-cards-list {
+  flex: 1 1 0;
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  justify-content: space-evenly;
+  overflow: hidden;
+}
+
+/* Flashcard Item */
+.choice-card-item {
+  flex: 1 1 0;
+  min-height: 0;
+  max-height: 92px;
+  position: relative;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 4px 8px;
+  border: 2.5px solid #e2e8f0;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+  cursor: grab;
+  touch-action: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.choice-card-item:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  border-color: #38bdf8;
+}
+
+.choice-card-item:active {
+  cursor: grabbing;
+}
+
+.choice-card-item.selected {
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.3), 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px) scale(1.02);
+  animation: pulseSelect 1.5s infinite alternate;
+}
+
+@keyframes pulseSelect {
+  from { box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.35); }
+  to { box-shadow: 0 0 0 7px rgba(245, 158, 11, 0.15); }
+}
+
+.choice-card-img-wrap {
+  width: 66px;
+  height: 54px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #f1f5f9;
+}
+
+.choice-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.choice-card-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+  overflow: hidden;
+}
+
+.choice-card-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.choice-card-hint {
+  font-size: 11px;
+  color: #64748b;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.choice-card-audio-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #0284c7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex: 0 0 30px;
+  transition: all 0.15s ease;
+}
+
+.choice-card-audio-btn:hover {
+  background: #0284c7;
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+/* Dragging Ghost clone */
+.choice-card-item.is-dragging {
+  opacity: 0.35;
+  transform: scale(0.95);
+}
+
+.drag-flying-proxy {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(1.08);
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.25));
+  border-radius: 14px;
+  background: #ffffff;
+  border: 3px solid #0284c7;
+  padding: 4px;
+  width: 130px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drag-flying-proxy img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 6. Two Boxes Target Section (กล่องสองกล่อง: สิ่งมีชีวิต & สิ่งไม่มีชีวิต) */
+.boxes-container {
+  flex: 1 1 0;
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Individual Box Unit */
+.sort-box-unit {
+  flex: 1 1 0;
+  min-height: 0;
+  max-width: 440px;
+  height: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 22px;
+  border: 3.5px solid #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 8px 10px;
+  gap: 6px;
+  position: relative;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Living Box Theme (Left Pink) */
+.sort-box-unit.box-living {
+  border-color: #fda4af;
+  box-shadow: 0 8px 24px rgba(244, 63, 94, 0.15);
+}
+
+.sort-box-unit.box-living .box-header-badge {
+  background: linear-gradient(135deg, #f43f5e, #e11d48);
+  color: #ffffff;
+}
+
+/* Non-Living Box Theme (Right Blue) */
+.sort-box-unit.box-nonliving {
+  border-color: #7dd3fc;
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.15);
+}
+
+.sort-box-unit.box-nonliving .box-header-badge {
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: #ffffff;
+}
+
+/* Drag Over / Target Active State */
+.sort-box-unit.drag-target-hover {
+  transform: scale(1.02) translateY(-2px);
+}
+
+.sort-box-unit.box-living.drag-target-hover {
+  border-color: #f43f5e;
+  box-shadow: 0 0 0 6px var(--living-glow), 0 16px 36px rgba(244, 63, 94, 0.25);
+}
+
+.sort-box-unit.box-nonliving.drag-target-hover {
+  border-color: #0284c7;
+  box-shadow: 0 0 0 6px var(--nonliving-glow), 0 16px 36px rgba(2, 132, 199, 0.25);
+}
+
+/* Box Header Info */
+.box-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2px;
+  flex: 0 0 auto;
+}
+
+.box-header-badge {
+  font-size: 14px;
+  font-weight: 800;
+  padding: 4px 14px;
+  border-radius: 16px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.box-count-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: #475569;
+  background: #f1f5f9;
+  padding: 3px 8px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+/* Top Drop Slot (ช่องหย่อนบัตรภาพด้านบน) */
+.box-drop-slot {
+  height: 46px;
+  flex: 0 0 46px;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 2.5px dashed #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.box-living .box-drop-slot {
+  border-color: #fb7185;
+  background: #fff1f2;
+  color: #e11d48;
+}
+
+.box-nonliving .box-drop-slot {
+  border-color: #38bdf8;
+  background: #f0f9ff;
+  color: #0284c7;
+}
+
+.box-drop-slot:hover, .sort-box-unit.drag-target-hover .box-drop-slot {
+  transform: translateY(-2px);
+  border-style: solid;
+}
+
+.box-living .box-drop-slot:hover, .box-living.drag-target-hover .box-drop-slot {
+  background: #ffe4e6;
+  border-color: #f43f5e;
+}
+
+.box-nonliving .box-drop-slot:hover, .box-nonliving.drag-target-hover .box-drop-slot {
+  background: #e0f2fe;
+  border-color: #0284c7;
+}
+
+.drop-slot-icon {
+  width: 20px;
+  height: 20px;
+  animation: bounceDown 1.4s infinite ease-in-out;
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* Box Front Graphic Card Area */
+.box-graphic-area {
+  flex: 1 1 0;
+  min-height: 0;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  border: 2.5px solid #1e293b;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.06);
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.box-graphic-img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+/* Sorted Cards Mini Stack on Box */
+.box-sorted-stack {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.sorted-card-chip {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  animation: popChip 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sorted-card-chip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes popChip {
+  0% { transform: scale(0) rotate(-20deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* Dropping Card Animation (When inserted into slot) */
+.card-dropping-anim {
+  position: fixed;
+  z-index: 10000;
+  pointer-events: none;
+  animation: dropIntoSlot 0.55s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes dropIntoSlot {
+  0% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -70%) scale(0.85) rotate(-5deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, -10%) scale(0.3) rotate(8deg);
+    opacity: 0;
+  }
+}
+
+/* Shake Animation for Wrong Answer */
+.card-shake-anim {
+  animation: gentleShake 0.5s ease-in-out;
+  border-color: #ef4444 !important;
+}
+
+@keyframes gentleShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px) rotate(-2deg); }
+  40% { transform: translateX(8px) rotate(2deg); }
+  60% { transform: translateX(-5px) rotate(-1deg); }
+  80% { transform: translateX(5px) rotate(1deg); }
+}
+
+/* Box Squash Bounce Reaction */
+.box-bounce-anim {
+  animation: boxSquash 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes boxSquash {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.05, 0.95); }
+  65% { transform: scale(0.97, 1.03); }
+  100% { transform: scale(1); }
+}
+
+/* 7. Success Celebration Overlay */
+.round-clear-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 11000;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.round-clear-card {
+  background: #ffffff;
+  border-radius: 32px;
+  border: 5px solid #ffffff;
+  padding: 30px 40px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  max-width: 450px;
+  width: 90%;
+  animation: popModal 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.round-clear-stars {
+  font-size: 40px;
+  animation: bounceDown 1.5s infinite;
+}
+
+.round-clear-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.round-clear-desc {
+  font-size: 16px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.btn-next-round {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 12px 32px;
+  border-radius: 30px;
+  border: 3px solid #ffffff;
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-next-round:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.5);
+}
+
+/* 8. Height-based Responsive Rules (Essential for Laptops 768p and Tablets) */
+@media (max-height: 680px) {
+  .jamneak-viewport {
+    padding: 4px 10px;
+    gap: 4px;
+  }
+  .jamneak-header {
+    height: 42px;
+    flex: 0 0 42px;
+  }
+  .action-btn {
+    width: 38px;
+    height: 38px;
+  }
+  .action-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  .jamneak-title-pill {
+    padding: 3px 14px;
+    gap: 6px;
+  }
+  .jamneak-title-pill h1 {
+    font-size: 16px;
+  }
+  .round-badge-pill, .score-badge-pill {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+  .instruction-banner {
+    padding: 2px 10px;
+    font-size: 12px;
+  }
+  .box-drop-slot {
+    height: 38px;
+    flex: 0 0 38px;
+    font-size: 12px;
+  }
+  .drop-slot-icon {
+    width: 16px;
+    height: 16px;
+  }
+  .palette-container {
+    flex: 0 0 240px;
+    width: 240px;
+    padding: 6px 8px;
+  }
+  .choice-card-item {
+    max-height: 80px;
+    padding: 3px 6px;
+    gap: 6px;
+  }
+  .choice-card-img-wrap {
+    width: 58px;
+    height: 46px;
+  }
+  .choice-card-name {
+    font-size: 13px;
+  }
+  .choice-card-hint {
+    font-size: 10px;
+  }
+  .choice-card-audio-btn {
+    width: 26px;
+    height: 26px;
+    flex: 0 0 26px;
+  }
+  .choice-card-audio-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* 9. Width-based Responsive Breakpoints */
+@media (max-width: 900px) {
+  .palette-container {
+    flex: 0 0 220px;
+    width: 220px;
+    padding: 6px;
+  }
+  .choice-card-img-wrap {
+    width: 56px;
+    height: 46px;
+  }
+  .choice-card-name {
+    font-size: 13px;
+  }
+  .jamneak-title-pill h1 {
+    font-size: 15px;
+  }
+  .title-subtag {
+    display: none;
+  }
+  .box-header-badge {
+    font-size: 13px;
+    padding: 3px 10px;
+  }
+}
+
+@media (max-width: 650px) {
+  .jamneak-arena {
+    flex-direction: column !important;
+  }
+  .palette-container {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+  .palette-cards-list {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  .choice-card-item {
+    flex: 1;
+    min-width: 110px;
+  }
+  .boxes-container {
+    width: 100%;
+  }
+}

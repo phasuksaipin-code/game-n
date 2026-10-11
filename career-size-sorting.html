@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>เกมเรียงลำดับขนาดอาชีพในฝัน (เล็ก >> ใหญ่ & ใหญ่ >> เล็ก) สำหรับเด็กปฐมวัย</title>
+  <link rel="stylesheet" href="css/style.css?v=1.3.7">
+  <link rel="stylesheet" href="css/career-size-sorting.css?v=1.3.7">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;700;800&family=Mitr:wght@500;700&family=Sarabun:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="size-sort-viewport">
+    <!-- Animated Soft Atmosphere Background -->
+    <div class="size-sort-bg-layer" aria-hidden="true"></div>
+
+    <!-- Top Header -->
+    <header class="size-sort-header">
+      <div class="header-left">
+        <!-- Back to Hub / Main Menu (Unified Circular Blue) -->
+        <a href="index.html" class="action-btn" title="กลับหน้าเมนูหลัก" style="text-decoration: none;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+          </svg>
+        </a>
+        <span class="version-tag-pill">v1.3.7</span>
+      </div>
+
+      <!-- Title Pill -->
+      <div class="size-sort-title-pill">
+        <span>📏</span>
+        <h1>เกมเรียงขนาดอาชีพในฝัน</h1>
+        <span class="mode-badge-pill" id="currentModeBadge">เล็ก ➔ ใหญ่</span>
+      </div>
+
+      <div class="header-right">
+        <!-- Sound & Music Toggle -->
+        <button class="action-btn" id="audioToggleBtn" title="เปิด/ปิด เสียงดนตรี">
+          <svg id="audioIcon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+          </svg>
+        </button>
+
+        <!-- Reset Current Board -->
+        <button class="action-btn" id="btnResetBoard" title="เริ่มเรียงใหม่">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- 2 Page Navigation Tabs (เล็ก >> ใหญ่ vs ใหญ่ >> เล็ก) -->
+    <div class="pages-mode-bar" role="tablist" aria-label="เลือกโหมดการเรียงลำดับ">
+      <button class="page-mode-btn active mode-btn-small-to-big" id="btnModeSmallToBig" data-mode="small_to_big">
+        <span class="mode-icon">🌱➔🌳</span>
+        <span class="mode-text">หน้า 1: เล็ก >> ใหญ่</span>
+      </button>
+      <button class="page-mode-btn mode-btn-big-to-small" id="btnModeBigToSmall" data-mode="big_to_small">
+        <span class="mode-icon">🌳➔🌱</span>
+        <span class="mode-text">หน้า 2: ใหญ่ >> เล็ก</span>
+      </button>
+    </div>
+
+    <!-- 17 Careers Selector Horizontal Bar -->
+    <nav class="careers-selector-bar" id="careersSelectorBar" aria-label="เลือกอาชีพ">
+      <!-- Injected via JavaScript -->
+    </nav>
+
+    <!-- Main Game Play Stage -->
+    <main class="sorting-play-arena">
+
+      <!-- The Illustrated Board Frame (1024x719 with Grab boy, daisies, doctor girl, & 4 slots) -->
+      <section class="sorting-board-wrapper" aria-label="กระดานเรียงลำดับขนาด">
+        <div class="sorting-board-frame" id="sortingBoardFrame">
+          <!-- Active Career Pill Badge -->
+          <div class="board-career-pill" id="boardCareerPill">
+            <span class="board-career-emoji" id="headerCareerEmoji">📮</span>
+            <span class="board-career-name" id="headerCareerName">บุรุษไปรษณีย์</span>
+          </div>
+
+          <!-- The 4 Order Slots Container overlaid directly on the 4 illustrated boxes -->
+          <div class="sorting-slots-grid" id="sortingSlotsGrid">
+            <!-- 4 Slots generated via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Side Options Tray (Shuffled 4 Character Size Cards) -->
+      <aside class="sorting-tray-dock" aria-label="กล่องตัวเลือกชิ้นส่วน">
+        <div class="tray-dock-header">
+          <div class="tray-dock-title">
+            <span>📦</span>
+            <span>ตัวเลือกชิ้นส่วน:</span>
+          </div>
+          <div class="tray-dock-hint" id="trayProgressText">เหลืออีก 4 ชิ้น</div>
+        </div>
+
+        <div class="tray-cards-row" id="trayCardsRow">
+          <!-- 4 Shuffled Cards injected via JS -->
+        </div>
+      </aside>
+
+    </main>
+
+    <!-- Celebration Modal Overlay -->
+    <div class="celebration-overlay" id="celebrationOverlay" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="celebration-card">
+        <div class="celebration-badge-icon">🌟🎉🌟</div>
+        <h2 class="celebration-title" id="celebrationTitle">เก่งมากครับ/ค่ะ!</h2>
+        <p class="celebration-subtitle" id="celebrationSubtitle">เรียงลำดับขนาดอาชีพได้ถูกต้องครบถ้วน!</p>
+        
+        <div class="celebration-stars-row">
+          <span class="star-pop">⭐</span>
+          <span class="star-pop">⭐</span>
+          <span class="star-pop">⭐</span>
+        </div>
+
+        <div class="celebration-actions">
+          <button class="btn-celebrate btn-secondary" id="btnCelebrationReplay">
+            <span>🔄</span>
+            <span>เล่นอีกครั้ง</span>
+          </button>
+          <button class="btn-celebrate btn-primary" id="btnCelebrationNext">
+            <span>เล่นอาชีพถัดไป</span>
+            <span>➔</span>
+          </button>
+          <button class="btn-celebrate btn-switch-mode" id="btnCelebrationSwitchMode">
+            <span>🔄</span>
+            <span id="btnSwitchModeText">สลับไปหน้า 2</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confettiCanvas"></canvas>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/audio.js?v=1.3.7"></script>
+  <script src="js/career-size-sorting-data.js?v=1.3.7"></script>
+  <script src="js/career-size-sorting-game.js?v=1.3.7"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <!-- 3D Studio Background -->
+    <radialGradient id="bgGlow" cx="45%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="55%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </radialGradient>
+    
+    <!-- 3D Ground Contact Shadow Filter -->
+    <filter id="groundShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+    
+    <!-- 3D Volumetric Depth Drop Shadow Filter -->
+    <filter id="clayShadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#0f172a" flood-opacity="0.22"/>
+    </filter>
+    
+    <!-- Specular Flare Filter -->
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <linearGradient id="goldCrownMain" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="25%" stop-color="#facc15"/>
+      <stop offset="65%" stop-color="#eab308"/>
+      <stop offset="90%" stop-color="#ca8a04"/>
+      <stop offset="100%" stop-color="#854d0e"/>
+    </linearGradient>
+    <radialGradient id="rubyGem" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#fecdd3"/>
+      <stop offset="35%" stop-color="#f43f5e"/>
+      <stop offset="85%" stop-color="#be123c"/>
+      <stop offset="100%" stop-color="#4c0519"/>
+    </radialGradient>
+    <radialGradient id="emeraldGem" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#a7f3d0"/>
+      <stop offset="40%" stop-color="#10b981"/>
+      <stop offset="85%" stop-color="#047857"/>
+      <stop offset="100%" stop-color="#064e3b"/>
+    </radialGradient>
+    <radialGradient id="sapphireGem" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#bfdbfe"/>
+      <stop offset="40%" stop-color="#3b82f6"/>
+      <stop offset="85%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#1e3a8a"/>
+    </radialGradient>
+    <linearGradient id="cushionRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="60%" stop-color="#b91c1c"/>
+      <stop offset="100%" stop-color="#7f1d1d"/>
+    </linearGradient>
+
+  </defs>
+
+  <!-- Studio Backdrop Card -->
+  <rect width="500" height="500" rx="36" fill="url(#bgGlow)"/>
+  
+  <!-- Ground Shadow -->
+  <ellipse cx="250" cy="445" rx="145" ry="24" fill="#64748b" opacity="0.35" filter="url(#groundShadow)"/>
+  <ellipse cx="250" cy="445" rx="85" ry="14" fill="#1e293b" opacity="0.45" filter="url(#groundShadow)"/>
+
+  <!-- 3D Model Layer -->
+  <g filter="url(#clayShadow)">
+
+    <!-- Royal Velvet Cushion Base -->
+    <ellipse cx="250" cy="420" rx="160" ry="32" fill="url(#cushionRed)"/>
+    <ellipse cx="250" cy="415" rx="145" ry="24" fill="#dc2626"/>
+
+    <!-- Left & Right Royal Ear-Pieces (กรรเจียกจร) -->
+    <path d="M 125 365 Q 85 330 95 285 Q 120 320 135 345 Z" fill="url(#goldCrownMain)"/>
+    <circle cx="100" cy="305" r="9" fill="url(#rubyGem)"/>
+    <path d="M 375 365 Q 415 330 405 285 Q 380 320 365 345 Z" fill="url(#goldCrownMain)"/>
+    <circle cx="400" cy="305" r="9" fill="url(#rubyGem)"/>
+
+    <!-- Main Diadem Ring Base (รัดเกล้า) -->
+    <path d="M 130 380 Q 250 415 370 380 L 365 335 Q 250 365 135 335 Z" fill="url(#goldCrownMain)"/>
+
+    <!-- Tier 1 (ฐานชั้นล่าง) -->
+    <path d="M 150 340 Q 250 365 350 340 L 335 275 Q 250 295 165 275 Z" fill="url(#goldCrownMain)"/>
+
+    <!-- Tier 2 (ชั้นกลาง) -->
+    <path d="M 175 280 Q 250 300 325 280 L 310 220 Q 250 238 190 220 Z" fill="url(#goldCrownMain)"/>
+
+    <!-- Tier 3 (ชั้นยอดบัว) -->
+    <path d="M 200 225 Q 250 240 300 225 L 285 170 Q 250 182 215 170 Z" fill="url(#goldCrownMain)"/>
+
+    <!-- Spire Cone to Apex (ยอดชฎาเรียวแหลม) -->
+    <path d="M 220 172 Q 250 182 280 172 L 254 50 Q 250 45 246 50 Z" fill="url(#goldCrownMain)"/>
+
+    <!-- Apex Gem Finial (นพเก้าบนยอด) -->
+    <circle cx="250" cy="45" r="14" fill="url(#rubyGem)"/>
+    <circle cx="246" cy="40" r="4.5" fill="#ffffff" opacity="0.9"/>
+
+    <!-- Decorative 3D Inset Jewels on Tiers -->
+    <circle cx="250" cy="365" r="13" fill="url(#rubyGem)"/>
+    <circle cx="195" cy="360" r="10" fill="url(#emeraldGem)"/>
+    <circle cx="305" cy="360" r="10" fill="url(#sapphireGem)"/>
+    <circle cx="155" cy="355" r="8" fill="url(#rubyGem)"/>
+    <circle cx="345" cy="355" r="8" fill="url(#emeraldGem)"/>
+
+    <circle cx="250" cy="305" r="11" fill="url(#emeraldGem)"/>
+    <circle cx="205" cy="300" r="9" fill="url(#sapphireGem)"/>
+    <circle cx="295" cy="300" r="9" fill="url(#rubyGem)"/>
+
+    <circle cx="250" cy="250" r="10" fill="url(#sapphireGem)"/>
+    <circle cx="250" cy="195" r="8" fill="url(#rubyGem)"/>
+
+    <!-- Specular Sparkle Stars -->
+    <g fill="#ffffff" opacity="0.95">
+      <path d="M 250 15 L 253 35 L 273 38 L 253 41 L 250 61 L 247 41 L 227 38 L 247 35 Z" transform="scale(0.5) translate(300, 40)"/>
+      <path d="M 250 15 L 253 35 L 273 38 L 253 41 L 250 61 L 247 41 L 227 38 L 247 35 Z" transform="scale(0.35) translate(80, 500)"/>
+    </g>
+
+  </g>
+</svg>

@@ -1,0 +1,834 @@
+/* ==========================================================================
+   Career Size Sorting Game Styles (เกมเรียงลำดับขนาดอาชีพในฝัน)
+   Recreates the Preschool Illustrated Frame from the sample with:
+   - Thick black outlines & rounded card borders
+   - Top characters & daisy flower peeking decor
+   - Circular "เกม" badge & "อาชีพในฝัน" pill banner
+   - 4 Rounded slots for size ordering (เล็ก >> ใหญ่ and ใหญ่ >> เล็ก)
+   ========================================================================== */
+
+:root {
+  --board-outline: #1e293b;
+  --slot-bg: #f8fafc;
+  --slot-border: #334155;
+  --mode-small-big: #10b981;
+  --mode-big-small: #ef4444;
+  --accent-blue: #0284c7;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: 'Prompt', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #fce7f3;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.size-sort-viewport {
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-image: url('../assets/images/bg-career.jpg?v=1.3.7');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  padding-bottom: 24px;
+}
+
+/* Background Atmosphere Layer */
+.size-sort-bg-layer {
+  position: fixed;
+  inset: 0;
+  background-image: url('../assets/images/bg-career.jpg?v=1.3.7');
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px) saturate(1.2);
+  transform: scale(1.08);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Top Header */
+.size-sort-header {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px 6px;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Title Pill */
+.size-sort-title-pill {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 6px 20px;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  border: 2.5px solid #fed7aa;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.size-sort-title-pill h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+}
+
+.mode-badge-pill {
+  background: #10b981;
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 2px 10px;
+  border-radius: 999px;
+  transition: background 0.3s ease;
+}
+
+/* 2 Page Navigation Tabs (เล็ก >> ใหญ่ vs ใหญ่ >> เล็ก) */
+.pages-mode-bar {
+  position: relative;
+  z-index: 15;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 4px 16px 8px;
+  flex-shrink: 0;
+}
+
+.page-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 24px;
+  border-radius: 999px;
+  border: 3px solid #cbd5e1;
+  background: rgba(255, 255, 255, 0.92);
+  color: #475569;
+  font-size: 1.05rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  touch-action: manipulation;
+}
+
+.page-mode-btn:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+.page-mode-btn.active.mode-btn-small-to-big {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  border-color: #047857;
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
+  transform: scale(1.04);
+}
+
+.page-mode-btn.active.mode-btn-big-to-small {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff;
+  border-color: #b91c1c;
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.4);
+  transform: scale(1.04);
+}
+
+/* 17 Careers Selector Horizontal Bar */
+.careers-selector-bar {
+  position: relative;
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 4px 20px 10px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(2, 132, 199, 0.35) transparent;
+}
+
+.careers-selector-bar::-webkit-scrollbar {
+  height: 6px;
+}
+.careers-selector-bar::-webkit-scrollbar-thumb {
+  background: rgba(2, 132, 199, 0.35);
+  border-radius: 999px;
+}
+
+.career-select-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #e0f2fe;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #0369a1;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink: 0;
+}
+
+.career-select-tab:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  color: #0284c7;
+  border-color: #38bdf8;
+  box-shadow: 0 4px 10px rgba(2, 132, 199, 0.15);
+}
+
+.career-select-tab.active {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+  border-color: #0284c7;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+  transform: scale(1.05);
+}
+
+/* Main Playing Arena (Side-by-Side: Board on Left, Options on Right) */
+.sorting-play-arena {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 20px 14px;
+  gap: 20px;
+  box-sizing: border-box;
+  min-height: 0;
+}
+
+/* ==========================================================================
+   The Illustrated Board Frame (1024x719 preschool illustrated artwork)
+   ========================================================================== */
+.sorting-board-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 960px;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+.sorting-board-frame {
+  position: relative;
+  width: min(100%, calc((100vh - 165px) * (1024 / 719)));
+  width: min(100%, calc((100dvh - 165px) * (1024 / 719)));
+  aspect-ratio: 1024 / 719;
+  max-height: calc(100vh - 165px);
+  max-height: calc(100dvh - 165px);
+  background-image: url('../assets/images/career_frame_small_to_big.png?v=1.2.7');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 28px;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.16), 0 0 0 5px rgba(255, 255, 255, 0.95);
+  box-sizing: border-box;
+  transition: background-image 0.25s ease-in-out;
+  overflow: visible;
+}
+
+/* Active Career Pill Badge in Frame */
+.board-career-pill {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 3px solid #0284c7;
+  border-radius: 999px;
+  padding: 4px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0369a1;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.board-career-emoji {
+  font-size: 1.25rem;
+}
+
+.board-career-name {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+}
+
+/* ==========================================================================
+   The 4 Order Slots Container (Positioned directly over the 4 frame boxes)
+   ========================================================================== */
+.sorting-slots-grid {
+  position: absolute;
+  top: 49.37%;
+  height: 33.38%;
+  left: 0;
+  right: 0;
+  pointer-events: auto;
+}
+
+.sorting-slot-box {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 22px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+/* Specific percentage coordinates matching each of the 4 illustrated boxes */
+.sorting-slot-box:nth-child(1) {
+  left: 4.30%;
+  width: 22.66%;
+}
+
+.sorting-slot-box:nth-child(2) {
+  left: 27.34%;
+  width: 22.46%;
+}
+
+.sorting-slot-box:nth-child(3) {
+  left: 50.39%;
+  width: 22.46%;
+}
+
+.sorting-slot-box:nth-child(4) {
+  left: 73.44%;
+  width: 22.46%;
+}
+
+/* Empty Placeholder in Slot */
+.slot-empty-content {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.slot-index-badge {
+  font-size: 0.8rem;
+  font-weight: 900;
+  color: #0284c7;
+}
+
+.slot-target-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #334155;
+}
+
+.slot-size-icon {
+  font-size: 0.85rem;
+}
+
+/* Slot Hover & Drag-over */
+.sorting-slot-box.drag-over {
+  border-color: #f59e0b;
+  border-width: 5px;
+  background: #fffbeb;
+  box-shadow: 0 0 0 6px rgba(245, 158, 11, 0.25);
+  transform: scale(1.02);
+}
+
+.sorting-slot-box.tap-target-active {
+  border-color: #3b82f6;
+  border-width: 5px;
+  background: #eff6ff;
+  box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.25);
+  animation: pulseSlot 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes pulseSlot {
+  from { transform: scale(1); }
+  to { transform: scale(1.025); }
+}
+
+.sorting-slot-box.shake-error {
+  animation: slotShake 0.4s ease-in-out;
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+@keyframes slotShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+/* Placed Card inside Slot */
+.slot-placed-card {
+  position: absolute;
+  inset: 6px;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  animation: popInPlaced 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+}
+
+@keyframes popInPlaced {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.slot-placed-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.slot-remove-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  background: rgba(239, 68, 68, 0.9);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.slot-remove-btn:hover {
+  transform: scale(1.2);
+}
+
+/* ==========================================================================
+   Right Side Options Tray (ตัวเลือกชิ้นส่วนในแนวตั้ง)
+   ========================================================================== */
+.sorting-tray-dock {
+  width: 175px;
+  max-width: 195px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 3.5px solid #38bdf8;
+  border-radius: 24px;
+  padding: 10px 10px 12px;
+  box-shadow: 0 12px 32px rgba(2, 132, 199, 0.16), 0 0 0 4px rgba(255, 255, 255, 0.85);
+  box-sizing: border-box;
+  max-height: calc(100vh - 165px);
+  max-height: calc(100dvh - 165px);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.tray-dock-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 2px dashed #bae6fd;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.tray-dock-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0369a1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.tray-dock-hint {
+  font-size: 0.78rem;
+  font-weight: 800;
+  background: #e0f2fe;
+  color: #0284c7;
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* 4 Cards in 1 Vertical Column (แนวตั้ง เรียงจากบนลงล่าง) */
+.tray-cards-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  gap: 8px;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+  justify-items: stretch;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.tray-cards-row::-webkit-scrollbar {
+  display: none;
+}
+
+/* Individual Card in Vertical Column */
+.sortable-tray-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  background: #ffffff;
+  border: 3px solid #38bdf8;
+  border-radius: 16px;
+  padding: 4px 6px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  touch-action: pan-y;
+}
+
+.sortable-tray-card:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 10px 22px rgba(2, 132, 199, 0.22);
+  border-color: #0284c7;
+}
+
+.sortable-tray-card:active {
+  cursor: grabbing;
+}
+
+.sortable-tray-card.selected {
+  border-color: #ea580c;
+  box-shadow: 0 0 0 5px rgba(234, 88, 12, 0.3), 0 12px 24px rgba(234, 88, 12, 0.2);
+  transform: scale(1.05);
+  animation: selectBounce 1s infinite alternate ease-in-out;
+}
+
+@keyframes selectBounce {
+  from { transform: scale(1.04); }
+  to { transform: scale(1.07); }
+}
+
+.sortable-tray-card.is-placed {
+  opacity: 0.22;
+  pointer-events: none;
+  filter: grayscale(0.9);
+  border-style: dashed;
+}
+
+.tray-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  border-radius: 12px;
+}
+
+/* Floating Drag Ghost Element */
+.sort-drag-ghost {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.35));
+  transform: translate(-50%, -50%) scale(1.08);
+  will-change: transform, left, top;
+}
+
+.sort-drag-ghost img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 4px solid #f59e0b;
+}
+
+/* ==========================================================================
+   Celebration Overlay
+   ========================================================================== */
+.celebration-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99998;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.celebration-overlay.active {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.celebration-card {
+  background: #ffffff;
+  border-radius: 32px;
+  padding: 32px 36px;
+  text-align: center;
+  max-width: 460px;
+  width: 90%;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  transform: scale(0.85) translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.celebration-overlay.active .celebration-card {
+  transform: scale(1) translateY(0);
+}
+
+.celebration-badge-icon {
+  font-size: 54px;
+  margin-bottom: 8px;
+  animation: bounceCelebration 1s infinite alternate;
+}
+
+@keyframes bounceCelebration {
+  from { transform: translateY(0); }
+  to { transform: translateY(-8px); }
+}
+
+.celebration-title {
+  margin: 0 0 8px;
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: #1e293b;
+}
+
+.celebration-subtitle {
+  margin: 0 0 16px;
+  font-size: 1.1rem;
+  color: #475569;
+  font-weight: 600;
+}
+
+.celebration-stars-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  font-size: 42px;
+  margin-bottom: 24px;
+}
+
+.star-pop {
+  animation: starPopAnim 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.star-pop:nth-child(1) { animation-delay: 0.15s; }
+.star-pop:nth-child(2) { animation-delay: 0.3s; }
+.star-pop:nth-child(3) { animation-delay: 0.45s; }
+
+@keyframes starPopAnim {
+  0% { transform: scale(0) rotate(-30deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.celebration-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn-celebrate {
+  width: 100%;
+  max-width: 280px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  touch-action: manipulation;
+}
+
+.btn-celebrate.btn-primary {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+}
+
+.btn-celebrate.btn-secondary {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.btn-celebrate.btn-switch-mode {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+}
+
+.btn-celebrate:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* Confetti Canvas */
+#confettiCanvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99997;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 920px) and (orientation: portrait) {
+  .sorting-play-arena {
+    flex-direction: column;
+    padding: 4px 14px 16px;
+    gap: 14px;
+  }
+
+  .sorting-board-wrapper {
+    max-width: 100%;
+  }
+
+  .sorting-board-frame {
+    width: 100%;
+    max-height: none;
+  }
+
+  .sorting-tray-dock {
+    width: 100%;
+    max-width: 600px;
+    max-height: none;
+    padding: 10px 14px 12px;
+  }
+
+  .tray-dock-header {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .tray-cards-row {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    gap: 8px;
+  }
+
+  .sortable-tray-card {
+    aspect-ratio: 1.42;
+    height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .size-sort-title-pill h1 {
+    font-size: 1rem;
+  }
+
+  .pages-mode-bar {
+    gap: 8px;
+  }
+
+  .page-mode-btn {
+    padding: 5px 14px;
+    font-size: 0.85rem;
+  }
+
+  .board-career-pill {
+    top: 8px;
+    right: 10px;
+    padding: 2px 10px;
+    font-size: 0.82rem;
+  }
+
+  .tray-cards-row {
+    gap: 6px;
+  }
+
+  .sortable-tray-card {
+    border-radius: 12px;
+    padding: 3px;
+  }
+}
+

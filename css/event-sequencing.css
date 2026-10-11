@@ -1,0 +1,734 @@
+/* ==========================================================================
+   Event Sequencing Game Styles (เกมเรียงลำดับเหตุการณ์ก่อน - หลัง)
+   Theme: Vibrant Preschool Pastel with Illustrated Artwork Board & Vertical Tray
+   Version: v1.3.7
+   ========================================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  font-family: 'Prompt', 'Mitr', 'Sarabun', sans-serif;
+  background-color: #e0f2fe;
+}
+
+/* ==========================================================================
+   Main Viewport & Background Layer
+   ========================================================================== */
+.event-viewport {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.event-bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: url('../assets/images/bg_before_after.jpg?v=1.3.7');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  filter: saturate(1.08) brightness(1.02);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Top Header (Unified Blue Circular Buttons & Pills)
+   ========================================================================== */
+.event-header {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px 6px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Unified Circular Blue Buttons */
+.action-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.45);
+}
+
+.action-btn:active {
+  transform: scale(0.95);
+}
+
+.action-btn.active {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+}
+
+/* Version Pill */
+.version-tag-pill {
+  font-family: 'Prompt', monospace, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #0369a1;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1.5px solid #38bdf8;
+  padding: 3px 10px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  letter-spacing: 0.5px;
+}
+
+/* Title Pill */
+.event-title-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2.5px solid #38bdf8;
+  padding: 6px 18px;
+  border-radius: 999px;
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.15);
+}
+
+.event-title-pill h1 {
+  font-size: 1.22rem;
+  font-weight: 800;
+  color: #0369a1;
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+
+.level-badge-pill {
+  font-size: 0.88rem;
+  font-weight: 800;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: #b45309;
+  border: 1.5px solid #fde68a;
+}
+
+/* ==========================================================================
+   Story Tabs Navigation (5 Stories)
+   ========================================================================== */
+.stories-selector-bar {
+  position: relative;
+  z-index: 15;
+  width: 100%;
+  max-width: 1300px;
+  margin: 4px auto 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 4px 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.stories-selector-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.story-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 18px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid #bae6fd;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0369a1;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.story-tab-btn:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  border-color: #38bdf8;
+  box-shadow: 0 6px 14px rgba(2, 132, 199, 0.18);
+}
+
+.story-tab-btn.active {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+  border-color: #0284c7;
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.35);
+  transform: scale(1.04);
+}
+
+.story-tab-emoji {
+  font-size: 1.15rem;
+}
+
+/* ==========================================================================
+   Play Arena Stage (Board on Left, Vertical Tray on Right)
+   ========================================================================== */
+.event-play-arena {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 16px 14px;
+  gap: 16px;
+  box-sizing: border-box;
+  min-height: 0;
+}
+
+/* ==========================================================================
+   Board Frame Wrapper & Slots
+   ========================================================================== */
+.event-board-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 980px;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+.event-board-frame {
+  position: relative;
+  width: min(100%, calc((100vh - 165px) * (1536 / 1024)));
+  width: min(100%, calc((100dvh - 165px) * (1536 / 1024)));
+  aspect-ratio: 1536 / 1024;
+  max-height: calc(100vh - 165px);
+  max-height: calc(100dvh - 165px);
+  background-image: url('../assets/images/before_after_frame.jpg?v=1.3.7');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 28px;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.16), 0 0 0 5px rgba(255, 255, 255, 0.95);
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+/* Story Title Banner Capsule on Frame */
+.board-story-pill {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 3px solid #0284c7;
+  border-radius: 999px;
+  padding: 4px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0369a1;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.board-story-emoji {
+  font-size: 1.25rem;
+}
+
+.board-story-name {
+  font-weight: 800;
+  letter-spacing: -0.2px;
+}
+
+/* The 5 Order Slots Container (Positioned over the 5 illustrated boxes) */
+.event-slots-grid {
+  position: absolute;
+  top: 50.20%;
+  height: 42.00%;
+  left: 0;
+  right: 0;
+  pointer-events: auto;
+}
+
+.event-slot-box {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 18px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+/* Matching coordinates of the 5 illustrated boxes on frame */
+.event-slot-box:nth-child(1) { left: 4.17%; width: 16.41%; }
+.event-slot-box:nth-child(2) { left: 23.18%; width: 16.21%; }
+.event-slot-box:nth-child(3) { left: 42.06%; width: 16.08%; }
+.event-slot-box:nth-child(4) { left: 60.74%; width: 16.28%; }
+.event-slot-box:nth-child(5) { left: 79.56%; width: 16.34%; }
+
+/* Drag & Drop / Tap Target Over States */
+.event-slot-box.drag-over {
+  border: 4px dashed #f59e0b;
+  background: rgba(254, 243, 199, 0.45);
+  box-shadow: 0 0 0 5px rgba(245, 158, 11, 0.25);
+  transform: scale(1.02);
+}
+
+.event-slot-box.tap-target-active {
+  border: 4px dashed #3b82f6;
+  background: rgba(239, 246, 255, 0.55);
+  box-shadow: 0 0 0 5px rgba(59, 130, 246, 0.25);
+  animation: pulseSlot 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes pulseSlot {
+  from { transform: scale(1); }
+  to { transform: scale(1.025); }
+}
+
+.event-slot-box.shake-error {
+  animation: slotShake 0.4s ease-in-out;
+  border: 4px solid #ef4444;
+  background: rgba(254, 226, 226, 0.5);
+}
+
+@keyframes slotShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* Placed Card inside Slot */
+.slot-placed-card {
+  position: absolute;
+  inset: 2px;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  animation: popInPlaced 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes popInPlaced {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.slot-placed-img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  border-radius: 14px;
+}
+
+.slot-remove-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  background: rgba(239, 68, 68, 0.92);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease;
+  z-index: 12;
+}
+
+.slot-remove-btn:hover {
+  transform: scale(1.2);
+}
+
+/* ==========================================================================
+   Right Side Options Tray (แนวตั้ง 1 คอลัมน์ เลื่อนได้)
+   ========================================================================== */
+.event-tray-dock {
+  width: 175px;
+  max-width: 195px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 3.5px solid #38bdf8;
+  border-radius: 24px;
+  padding: 10px 10px 12px;
+  box-shadow: 0 12px 32px rgba(2, 132, 199, 0.16), 0 0 0 4px rgba(255, 255, 255, 0.85);
+  box-sizing: border-box;
+  max-height: calc(100vh - 165px);
+  max-height: calc(100dvh - 165px);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.tray-dock-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 2px dashed #bae6fd;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.tray-dock-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0369a1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.tray-dock-hint {
+  font-size: 0.78rem;
+  font-weight: 800;
+  background: #e0f2fe;
+  color: #0284c7;
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* 5 Cards in 1 Vertical Column (แนวตั้ง เรียงจากบนลงล่าง) */
+.event-tray-cards-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #38bdf8 transparent;
+  padding-right: 2px;
+}
+
+.event-tray-cards-col::-webkit-scrollbar {
+  width: 4px;
+}
+
+.event-tray-cards-col::-webkit-scrollbar-thumb {
+  background: #38bdf8;
+  border-radius: 4px;
+}
+
+/* Individual Card in Vertical Column */
+.sortable-event-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 415 / 741;
+  flex-shrink: 0;
+  background: #ffffff;
+  border: 3px solid #38bdf8;
+  border-radius: 16px;
+  padding: 2px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  touch-action: pan-y;
+  overflow: hidden;
+}
+
+.sortable-event-card:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 10px 22px rgba(2, 132, 199, 0.22);
+  border-color: #0284c7;
+}
+
+.sortable-event-card:active {
+  cursor: grabbing;
+}
+
+.sortable-event-card.selected {
+  border-color: #ea580c;
+  box-shadow: 0 0 0 5px rgba(234, 88, 12, 0.35), 0 12px 24px rgba(234, 88, 12, 0.2);
+  transform: scale(1.04);
+  animation: selectBounce 1s infinite alternate ease-in-out;
+}
+
+@keyframes selectBounce {
+  from { transform: scale(1.03); }
+  to { transform: scale(1.06); }
+}
+
+.sortable-event-card.is-placed {
+  opacity: 0.2;
+  pointer-events: none;
+  filter: grayscale(0.9);
+  border-style: dashed;
+}
+
+.event-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  border-radius: 12px;
+}
+
+/* Floating Drag Ghost Element */
+.event-drag-ghost {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.35));
+  transform: translate(-50%, -50%) scale(1.06);
+  will-change: transform, left, top;
+}
+
+.event-drag-ghost img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+/* ==========================================================================
+   Celebration Overlay Modal
+   ========================================================================== */
+.celebration-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99990;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  padding: 16px;
+}
+
+.celebration-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.celebration-card {
+  background: #ffffff;
+  border: 4px solid #38bdf8;
+  border-radius: 32px;
+  padding: 32px 28px;
+  text-align: center;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 0 24px 60px rgba(2, 132, 199, 0.35);
+  animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalPop {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.celebration-badge-trophy {
+  font-size: 4rem;
+  margin-bottom: 8px;
+  animation: trophyBounce 0.8s infinite alternate ease-in-out;
+}
+
+@keyframes trophyBounce {
+  from { transform: translateY(0) scale(1); }
+  to { transform: translateY(-8px) scale(1.08); }
+}
+
+.celebration-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #0369a1;
+  margin-bottom: 8px;
+}
+
+.celebration-desc {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.celebration-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.btn-celebrate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-celebrate.btn-primary {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+}
+
+.btn-celebrate.btn-secondary {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.btn-celebrate:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* Confetti Canvas */
+#confettiCanvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99997;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 920px) and (orientation: portrait) {
+  .event-play-arena {
+    flex-direction: column;
+    padding: 4px 12px 16px;
+    gap: 12px;
+  }
+
+  .event-board-wrapper {
+    max-width: 100%;
+  }
+
+  .event-board-frame {
+    width: 100%;
+    max-height: none;
+  }
+
+  .event-tray-dock {
+    width: 100%;
+    max-width: 600px;
+    max-height: none;
+    padding: 10px 14px 12px;
+  }
+
+  .tray-dock-header {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .event-tray-cards-col {
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 8px;
+    padding-bottom: 4px;
+  }
+
+  .sortable-event-card {
+    width: 90px;
+    height: 160px;
+    aspect-ratio: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .event-title-pill h1 {
+    font-size: 1rem;
+  }
+
+  .board-story-pill {
+    top: 8px;
+    right: 10px;
+    padding: 2px 10px;
+    font-size: 0.82rem;
+  }
+
+  .story-tab-btn {
+    padding: 5px 14px;
+    font-size: 0.85rem;
+  }
+}

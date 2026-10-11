@@ -1,0 +1,556 @@
+/* 
+ * Main Menu / Hub Styles (หน้าเมนูหลัก เกมการเรียนรู้ปฐมวัย)
+ */
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.menu-viewport {
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: clamp(10px, 2vh, 20px) clamp(12px, 2.5vw, 24px);
+  overflow-x: hidden;
+  overflow-y: visible;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+/* Header */
+.menu-header {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.menu-title-container {
+  background: #ffffff;
+  border: 3.5px solid #38bdf8;
+  border-radius: 40px;
+  padding: 8px 32px;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.18), inset 0 2px 4px #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menu-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 0.5px;
+}
+
+/* Subtitle under title */
+.menu-hero-text {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #bae6fd;
+  border-radius: 20px;
+  padding: 6px 24px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0284c7;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.12);
+  margin-top: -6px;
+  margin-bottom: 6px;
+  z-index: 5;
+}
+
+/* Menu Hub Cards Container: Horizontal Scroll to allow unlimited games without squeezing */
+.games-hub-grid {
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 20px;
+  z-index: 5;
+  padding: 12px 20px 24px;
+  box-sizing: border-box;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: #38bdf8 rgba(224, 242, 254, 0.6);
+}
+
+.games-hub-grid::-webkit-scrollbar {
+  height: 12px;
+}
+
+.games-hub-grid::-webkit-scrollbar-track {
+  background: rgba(224, 242, 254, 0.6);
+  border-radius: 12px;
+  margin: 0 24px;
+}
+
+.games-hub-grid::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #38bdf8, #0284c7);
+  border-radius: 12px;
+  border: 2px solid #ffffff;
+}
+
+.games-hub-grid::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #0284c7, #0369a1);
+}
+
+/* Individual Game Card Portal */
+.game-portal-card {
+  position: relative;
+  flex: 0 0 280px;
+  width: 280px;
+  min-width: 280px;
+  scroll-snap-align: start;
+  background: #ffffff;
+  border: 4px solid #38bdf8;
+  border-radius: 28px;
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.12);
+  padding: 16px 14px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+.game-portal-card.card-landmarks {
+  border-color: #3b82f6;
+  background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
+}
+
+.game-portal-card.card-sizes {
+  border-color: #f59e0b;
+  background: linear-gradient(180deg, #ffffff 0%, #fffbeb 100%);
+}
+
+.game-portal-card.card-jigsaw {
+  border-color: #10b981;
+  background: linear-gradient(180deg, #ffffff 0%, #ecfdf5 100%);
+}
+
+.game-portal-card.card-numbers {
+  border-color: #8b5cf6;
+  background: linear-gradient(180deg, #ffffff 0%, #f5f3ff 100%);
+}
+
+.game-portal-card.card-occupation {
+  border-color: #0284c7;
+  background: linear-gradient(180deg, #ffffff 0%, #e0f2fe 100%);
+}
+
+.game-portal-card.card-career-jigsaw {
+  border-color: #ec4899;
+  background: linear-gradient(180deg, #ffffff 0%, #fdf2f8 100%);
+}
+
+.game-portal-card.card-career-size {
+  border-color: #f43f5e;
+  background: linear-gradient(180deg, #ffffff 0%, #fff1f2 100%);
+}
+
+.game-portal-card.card-event-sequence {
+  border-color: #06b6d4;
+  background: linear-gradient(180deg, #ffffff 0%, #ecfeff 100%);
+}
+
+.game-portal-card.card-event-sequence:hover {
+  border-color: #0891b2;
+}
+
+.game-portal-card.card-thai-tracing {
+  border-color: #f43f5e;
+  background: linear-gradient(180deg, #ffffff 0%, #fff1f2 100%);
+}
+
+.game-portal-card.card-thai-tracing:hover {
+  border-color: #e11d48;
+}
+
+.game-portal-card.card-thai-select {
+  border-color: #ea580c;
+  background: linear-gradient(180deg, #ffffff 0%, #fff7ed 100%);
+}
+
+.game-portal-card.card-thai-select:hover {
+  border-color: #c2410c;
+}
+
+
+.game-portal-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 24px 48px rgba(37, 99, 235, 0.22);
+}
+
+.game-portal-card.card-landmarks:hover {
+  border-color: #1d4ed8;
+}
+
+.game-portal-card.card-sizes:hover {
+  border-color: #d97706;
+}
+
+.game-portal-card.card-jigsaw:hover {
+  border-color: #059669;
+}
+
+.game-portal-card.card-numbers:hover {
+  border-color: #6d28d9;
+}
+
+.game-portal-card.card-sizes:hover {
+  border-color: #d97706;
+}
+
+.game-portal-card.card-jigsaw:hover {
+  border-color: #059669;
+}
+
+/* Badge on top of card */
+.portal-badge {
+  background: #eff6ff;
+  border: 2px solid #93c5fd;
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #1e40af;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.card-sizes .portal-badge {
+  background: #fef3c7;
+  border-color: #fcd34d;
+  color: #b45309;
+}
+
+.card-jigsaw .portal-badge {
+  background: #d1fae5;
+  border-color: #6ee7b7;
+  color: #065f46;
+}
+
+/* Preview Graphic Container */
+.portal-preview-wrap {
+  width: 100%;
+  height: 160px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 2.5px dashed #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.portal-img-preview {
+  height: 105px;
+  max-width: 38%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.14));
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.game-portal-card:hover .portal-img-preview {
+  transform: scale(1.08) rotate(2deg);
+}
+
+/* Title & Description */
+.portal-content {
+  margin: 6px 0 10px 0;
+}
+
+.portal-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.portal-desc {
+  font-size: 0.92rem;
+  color: #475569;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+/* Big Action Play Button */
+.portal-btn-play {
+  width: 100%;
+  max-width: 260px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: none;
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+.card-landmarks .portal-btn-play {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+}
+
+.card-sizes .portal-btn-play {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  box-shadow: 0 6px 16px rgba(245, 158, 11, 0.35);
+}
+
+.card-jigsaw .portal-btn-play {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35);
+}
+
+.card-numbers .portal-btn-play {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.35);
+}
+
+.card-occupation .portal-btn-play {
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
+}
+
+.card-career-jigsaw .portal-btn-play {
+  background: linear-gradient(135deg, #ec4899, #db2777);
+  box-shadow: 0 6px 16px rgba(236, 72, 153, 0.35);
+}
+
+.card-career-size .portal-btn-play {
+  background: linear-gradient(135deg, #f43f5e, #e11d48);
+  box-shadow: 0 6px 16px rgba(244, 63, 94, 0.35);
+}
+
+.card-career-size .portal-badge {
+  background: #ffe4e6;
+  border-color: #fecdd3;
+  color: #be123c;
+}
+
+.card-event-sequence .portal-btn-play {
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+  box-shadow: 0 6px 16px rgba(6, 182, 212, 0.35);
+}
+
+.card-event-sequence .portal-badge {
+  background: #cffafe;
+  border-color: #a5f3fc;
+  color: #0e7490;
+}
+
+.card-thai-tracing .portal-btn-play {
+  background: linear-gradient(135deg, #f43f5e, #e11d48);
+  box-shadow: 0 6px 16px rgba(244, 63, 94, 0.35);
+}
+
+.card-thai-tracing .portal-badge {
+  background: #ffe4e6;
+  border-color: #fecdd3;
+  color: #be123c;
+}
+
+.card-thai-select .portal-btn-play {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  box-shadow: 0 6px 16px rgba(234, 88, 12, 0.35);
+}
+
+.card-thai-select .portal-badge {
+  background: #ffedd5;
+  border-color: #fed7aa;
+  color: #c2410c;
+}
+
+.card-jamneak {
+  border-color: #10b981;
+  background: linear-gradient(180deg, #ffffff 0%, #ecfdf5 100%);
+}
+
+.card-jamneak .portal-badge {
+  background: #d1fae5;
+  border-color: #a7f3d0;
+  color: #065f46;
+}
+
+.card-jamneak .portal-btn-play {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35);
+}
+
+.game-portal-card:hover .portal-btn-play {
+  transform: scale(1.05);
+}
+
+/* Number game portal preview bubbles */
+.number-portal-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: radial-gradient(circle at center, #ede9fe 0%, #ffffff 80%);
+}
+
+.portal-num-bubble {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.portal-num-bubble.num-arabic {
+  background: #eff6ff;
+  border: 3px solid #3b82f6;
+  color: #1d4ed8;
+}
+
+.portal-num-bubble.num-thai {
+  background: #faf5ff;
+  border: 3px solid #8b5cf6;
+  color: #6d28d9;
+  font-family: 'Sarabun', 'TH Sarabun New', 'Prompt', sans-serif;
+  font-size: 1.85rem;
+  font-weight: 800;
+}
+
+.portal-num-connector {
+  font-size: 1.25rem;
+  color: #8b5cf6;
+  font-weight: 800;
+  animation: pulseConnector 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes pulseConnector {
+  from { transform: translateX(-3px); opacity: 0.6; }
+  to { transform: translateX(3px); opacity: 1; }
+}
+
+/* Footer note */
+.menu-footer {
+  z-index: 5;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 4px 18px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .menu-viewport {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 12px 16px 20px;
+  }
+  .games-hub-grid {
+    gap: 16px;
+    padding: 10px 14px 20px;
+  }
+  .game-portal-card {
+    flex: 0 0 270px;
+    width: 270px;
+    min-width: 270px;
+  }
+}
+
+@media (max-width: 600px) {
+  .menu-viewport {
+    padding: 10px 12px 18px;
+  }
+  .games-hub-grid {
+    gap: 12px;
+    padding: 8px 10px 18px;
+  }
+  .game-portal-card {
+    flex: 0 0 250px;
+    width: 250px;
+    min-width: 250px;
+    padding: 14px 12px 16px;
+  }
+  .menu-title-container {
+    padding: 6px 18px;
+  }
+  .menu-title {
+    font-size: 1.15rem;
+  }
+  .menu-hero-text {
+    font-size: 0.92rem;
+    padding: 4px 16px;
+  }
+  .portal-preview-wrap {
+    height: 135px;
+  }
+  .portal-img-preview {
+    height: 90px;
+  }
+}
+
+/* Version Indicator Pill (Project-wide +1 Tracking) */
+.version-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 10px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1.5px solid #0284c7;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #0369a1;
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.2);
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+  user-select: none;
+  flex-shrink: 0;
+}
